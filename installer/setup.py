@@ -40,7 +40,7 @@
 #    os.system("sudo apt -qq install -y python3-pip")
 #    os.system("pip3 install pyyaml rich")
 
-import yaml, os, rich
+import yaml, os, rich, sys
 
 def ubuntu():
     with open("apps.yml", "r") as f:
@@ -113,6 +113,5 @@ def ubuntu():
         rich.print("[bold red]ERROR:[/bold red] An error occurred when installing packages")
         pass
 
-
-
-    
+if sys.argv[0] == "ubuntu":
+    ubuntu()

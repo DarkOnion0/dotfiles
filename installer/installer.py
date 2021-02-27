@@ -34,7 +34,7 @@ if os_name == "Pop!_OS" or os_name == "Ubuntu":
     os.system("sudo apt install -y python3-pip curl wget")
     os.system("pip3 install pyyaml rich")
 
-    os.system("python3 setup.py")
+    os.system("python3 setup.py ubuntu")
 
 else:
     print(f"Your Linux OS is not supported : \n\nOS ==> {os_name}")
