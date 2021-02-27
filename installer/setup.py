@@ -1,3 +1,9 @@
+#########################################
+# TODO add os version check
+# TODO add auto-configuration in script
+# TODO test the project
+#########################################
+
 import os
 with open("/etc/os-release", "r") as f:
     os_info = f.read()
