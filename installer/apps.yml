@@ -18,6 +18,9 @@ ubuntu:
       - echo "This is the the fingerprint from the docker repo ===> 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
       - sudo apt-key fingerprint 0EBFCD88
       - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    signal-repo:
+      - wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+      - echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
   
   packages:
     deb:
@@ -49,8 +52,14 @@ ubuntu:
       - containerd.io
       - flatpak
       - gimp
+      - wireshark-qt
+      - flameshot
+      - signal-desktop
     flatpak:
       - mindustry
+      - ElectronMail
+      - com.play0ad.zeroad
+      - com.github.calo001.fondo
     external:
       mutlimc5:
         - wget https://files.multimc.org/downloads/multimc_1.4-1.deb # need to be updated when a new release is created
