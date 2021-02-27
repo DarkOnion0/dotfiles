@@ -113,5 +113,5 @@ def ubuntu():
         rich.print("[bold red]ERROR:[/bold red] An error occurred when installing packages")
         pass
 
-if sys.argv[0] == "ubuntu":
+if sys.argv[1] == "ubuntu":
     ubuntu()
