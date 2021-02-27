@@ -31,7 +31,7 @@ os_name = os_info[0][1]
 
 if os_name == "Pop!_OS" or os_name == "Ubuntu":
 
-    os.system("sudo apt -qq install -y python3-pip")
+    os.system("sudo apt install -y python3-pip")
     os.system("pip3 install pyyaml rich")
 
     from setup import ubuntu

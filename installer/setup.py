@@ -66,7 +66,7 @@ def ubuntu():
 
                 #print(key, command)
             
-            os.system("sudo apt -qq update")
+            os.system("sudo apt update")
 
             #print(command_list)
 
@@ -81,7 +81,7 @@ def ubuntu():
             software_deb = software.get("deb")
             for apps in software_deb:
                 #print(apps)
-                os.system(f"sudo apt -qq install -y {apps}")
+                os.system(f"sudo apt install -y {apps}")
         except:
             pass
         
