@@ -1,6 +1,8 @@
+
+
 set fish_greeting                                 # Supresses fish's intro message
-set EDITOR "nvim ''"                 		      # $EDITOR use Emacs in terminal
-set VISUAL "codium "              		          # $VISUAL use Emacs in GUI mode
+set EDITOR "nvim ''"                 		  # $EDITOR use Emacs in terminal
+set VISUAL "codium "              		  # $VISUAL use Emacs in GUI mode
 
 
 #
@@ -26,7 +28,7 @@ starship init fish | source
 
 # alias e='vscodium ' # VSCodium name in ArchLinux
 
-alias e='codium '       # VSCodium name in Ubuntu
-alias l='exa -la '      # shortcut with exa 
-alias c='batcat '       # shortcut for bat 
-alias cat='c '          # replace cat by bat
+alias e='codium ' # VSCodium name in Ubuntu
+alias l='exa -la '
+alias c='batcat '
+alias cat='c '
