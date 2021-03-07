@@ -205,3 +205,7 @@ bar {
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b		# launch wallpaper
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh		# launch polybar
 
+####################
+# CUSTOM APPARENCE #
+####################
+client.focused          #ff8828 #ff8828 #ffffff #2e9ef4   #ff8828
