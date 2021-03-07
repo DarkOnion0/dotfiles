@@ -1,14 +1,13 @@
-
-
 set fish_greeting                                 # Supresses fish's intro message
 set EDITOR "nvim ''"                 		  # $EDITOR use Emacs in terminal
 set VISUAL "codium "              		  # $VISUAL use Emacs in GUI mode
 
+neofetch
 
 #
 # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
 #
-colorscript random 
+#colorscript random 
 
 #
 # CUSTOM MANPAGER
