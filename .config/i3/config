@@ -195,15 +195,16 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+#bar {
+#        status_command i3status
+#}
 
 ####################
 # CUSTOM Autostart #
 ####################
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b		# launch wallpaper
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh		# launch polybar
+exec --no-startup-id feh --recursive --bg-fill --randomize ~/.wallpapers 			# launch random background
+exec --no-startup-id picom -b									# launch the compositor
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh					# launch polybar
 
 ####################
 # CUSTOM APPARENCE #
