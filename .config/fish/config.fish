@@ -1,8 +1,8 @@
 set fish_greeting                                 # Supresses fish's intro message
-set EDITOR "nvim ''"                 		  # $EDITOR use Emacs in terminal
-set VISUAL "codium "              		  # $VISUAL use Emacs in GUI mode
+set EDITOR "nvim ''"                 		  # $EDITOR use Nvim in terminal
+set VISUAL "codium "              		  # $VISUAL use VSCodium in GUI mode
 
-neofetch
+welcome.py
 
 #
 # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
@@ -26,7 +26,6 @@ starship init fish | source
 
 
 # alias e='vscodium ' # VSCodium name in ArchLinux
-
 alias e='codium ' # VSCodium name in Ubuntu
 alias l='exa -la '
 alias c='batcat '
