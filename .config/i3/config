@@ -104,6 +104,20 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+###################
+# CUSTOM SHORTCUT #
+###################
+
+# launch firefox
+bindsym $mod+Ctrl+q exec firefox
+
+# launch vscodium
+bindsym $mod+Ctrl+s exec codium
+
+# launch filesysteme
+
+bindsym $mod+Ctrl+w exec nautilus
+
 # launch rofi
 #bindsym $mod+w exec --no-startup-id rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
 bindsym $mod+w exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
@@ -184,3 +198,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+####################
+# CUSTOM Autostart #
+####################
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b		# launch wallpaper
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh		# launch polybar
+
