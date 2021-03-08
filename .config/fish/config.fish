@@ -25,8 +25,10 @@ starship init fish | source
 #
 
 
-# alias e='vscodium ' # VSCodium name in ArchLinux
-alias e='codium ' # VSCodium name in Ubuntu
+# alias e='vscodium ' 	# VSCodium name in ArchLinux
+alias e='codium ' 	# VSCodium name in Ubuntu
 alias l='exa -la '
 alias c='batcat '
 alias cat='c '
+alias vim='nvim '	# Replace vim by neovim
+alias vi='nvim '	# Replace vi by neovim
