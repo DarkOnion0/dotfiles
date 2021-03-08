@@ -200,11 +200,12 @@ bindsym $mod+r mode "resize"
 #}
 
 ####################
-# CUSTOM Autostart #
+# CUSTOM AUTOSTART #
 ####################
 exec --no-startup-id feh --recursive --bg-fill --randomize ~/.wallpapers 			# launch random background
-exec --no-startup-id picom -b									# launch the compositor
+exec_always --no-startup-id picom -b								# launch the compositor
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh					# launch polybar
+exec --no-startup-id corectrl									# launch corectrl for managing my GPU
 
 ####################
 # CUSTOM APPARENCE #
