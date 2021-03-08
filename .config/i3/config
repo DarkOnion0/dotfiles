@@ -115,12 +115,14 @@ bindsym $mod+Ctrl+q exec firefox
 bindsym $mod+Ctrl+s exec codium
 
 # launch filesysteme
-
 bindsym $mod+Ctrl+w exec nautilus
 
 # launch rofi
 #bindsym $mod+w exec --no-startup-id rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
 bindsym $mod+w exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
+
+# launch flameshot
+bindsym $mod+p exec flameshot gui
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -206,6 +208,7 @@ exec --no-startup-id feh --recursive --bg-fill --randomize ~/.wallpapers 			# la
 exec_always --no-startup-id picom -b								# launch the compositor
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh					# launch polybar
 exec --no-startup-id corectrl									# launch corectrl for managing my GPU
+exec --no-startip-id flameshot									# launch my screen capture applications
 
 ####################
 # CUSTOM APPARENCE #
