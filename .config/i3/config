@@ -104,26 +104,6 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-###################
-# CUSTOM SHORTCUT #
-###################
-
-# launch firefox
-bindsym $mod+Ctrl+q exec firefox
-
-# launch vscodium
-bindsym $mod+Ctrl+s exec codium
-
-# launch filesysteme
-bindsym $mod+Ctrl+w exec nautilus
-
-# launch rofi
-#bindsym $mod+w exec --no-startup-id rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
-bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
-
-# launch flameshot
-bindsym $mod+p exec flameshot gui
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -201,6 +181,26 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
+###################
+# CUSTOM SHORTCUT #
+###################
+
+# launch firefox
+bindsym $mod+Ctrl+q exec firefox
+
+# launch vscodium
+bindsym $mod+Ctrl+s exec codium
+
+# launch filesysteme
+bindsym $mod+Ctrl+w exec nautilus
+
+# launch rofi
+#bindsym $mod+w exec --no-startup-id rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
+bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
+
+# launch flameshot
+bindsym $mod+p exec flameshot gui
+
 ####################
 # CUSTOM AUTOSTART #
 ####################
@@ -215,3 +215,12 @@ exec --no-startip-id flameshot									# launch my screen capture applications
 ####################
 #client.focused          #ff8828 #ff8828 #ffffff #2e9ef4   #ff8828
 client.focused          #b3ffd9 #b3ffd9 #000000 #2e9ef4   #b3ffd9
+
+########################
+# CUSTOM WINDOWS RULES #
+########################
+
+workspace_layout tabbed
+
+for_window [class="Gnome-calculator"] floating enable
+
