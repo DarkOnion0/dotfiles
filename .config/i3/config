@@ -47,7 +47,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 #bindcode $mod+40 exec rofi -modi drun,run -show drun
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -119,7 +119,7 @@ bindsym $mod+Ctrl+w exec nautilus
 
 # launch rofi
 #bindsym $mod+w exec --no-startup-id rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons
-bindsym $mod+w exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
+bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
 
 # launch flameshot
 bindsym $mod+p exec flameshot gui
@@ -213,4 +213,5 @@ exec --no-startip-id flameshot									# launch my screen capture applications
 ####################
 # CUSTOM APPARENCE #
 ####################
-client.focused          #ff8828 #ff8828 #ffffff #2e9ef4   #ff8828
+#client.focused          #ff8828 #ff8828 #ffffff #2e9ef4   #ff8828
+client.focused          #b3ffd9 #b3ffd9 #000000 #2e9ef4   #b3ffd9
