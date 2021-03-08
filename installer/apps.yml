@@ -63,6 +63,8 @@ ubuntu:
       - podman
       - runc
       - kubectl
+      - feh
+      - picom
     flatpak:
       - mindustry
       - ElectronMail
