@@ -5,76 +5,81 @@
 #########################################
 import yaml, os, rich, sys
 
-def ubuntu():
-    with open("apps.yml", "r") as f:
-        app_list = dict(yaml.safe_load(f))
+def ubuntu(arg: str):
+    if arg == "20.10":
+        with open("apps.yml", "r") as f:
+            app_list = dict(yaml.safe_load(f))
 
-    #print(app_list)
+        #print(app_list)
 
-    try: # try to add listed repository
-        repos_tmp = app_list.get("ubuntu")
-        repos = repos_tmp.get("repos")
+        try: # try to add listed repository
+            repos_tmp = app_list.get("ubuntu")
+            print(repos_tmp)
+            repos_tmp = repos_tmp.get("20.10")
+            print(repos_tmp)
+            repos = repos_tmp.get("repos")
 
-        #print(repos, len(repos))
+            #print(repos, len(repos))
 
-        for key in repos: # get the repos name
-            #print("KEY ===> ", key)
-            command_list = repos.get(key)
-            #print("\nCOMMAND_LIST ===> ", command_list)
-            #print("\n", command_list)
+            for key in repos: # get the repos name
+                #print("KEY ===> ", key)
+                command_list = repos.get(key)
+                #print("\nCOMMAND_LIST ===> ", command_list)
+                #print("\n", command_list)
 
-            for command in command_list: # get all the command listed in the repo
-                #print("\n\n", command)
-                os.system(f"{command}")
+                for command in command_list: # get all the command listed in the repo
+                    #print("\n\n", command)
+                    os.system(f"{command}")
 
-                #print(key, command)
+                    #print(key, command)
+
+                os.system("sudo apt update")
+
+                #print(command_list)
+
+        except:
+            rich.print("[bold red]ERROR:[/bold red] You haven't setup any additional repository")
+            pass
+
+        try:
+            software = repos_tmp.get("packages")
+
+            try:
+                software_deb = software.get("deb")
+                for apps in software_deb:
+                    #print(apps)
+                    os.system(f"sudo apt install -y {apps}")
+            except:
+                pass
             
-            os.system("sudo apt update")
+            try:
+                software_flatpak = software.get("flatpak")
+                for apps in software_flatpak:
+                    #print(apps)
+                    os.system(f"flatpak install {apps}")
+            except:
+                pass
+            
+            try:
+                software_src = software.get("external")
+                for key in software_src:
+                    software_src_app = software_src.get(key)
 
-            #print(command_list)
+                    for command in software_src_app:
+                        os.system(f"cd /tmp/ && {command}")
 
-    except:
-        rich.print("[bold red]ERROR:[/bold red] You haven't setup any additional repository")
-        pass
+                #for apps in software_src:
+                #    #print(apps)
+                #    os.system(f"{apps}")
+            except:
+                pass
 
-    try:
-        software = repos_tmp.get("packages")
-        
-        try:
-            software_deb = software.get("deb")
-            for apps in software_deb:
-                #print(apps)
-                os.system(f"sudo apt install -y {apps}")
+            
+            #print(software)
         except:
+            rich.print("[bold red]ERROR:[/bold red] An error occurred when installing packages")
             pass
-        
-        try:
-            software_flatpak = software.get("flatpak")
-            for apps in software_flatpak:
-                #print(apps)
-                os.system(f"flatpak install {apps}")
-        except:
-            pass
-        
-        try:
-            software_src = software.get("external")
-            for key in software_src:
-                software_src_app = software_src.get(key)
-
-                for command in software_src_app:
-                    os.system(f"cd /tmp/ && {command}")
-
-            #for apps in software_src:
-            #    #print(apps)
-            #    os.system(f"{apps}")
-        except:
-            pass
-
-        
-        #print(software)
-    except:
-        rich.print("[bold red]ERROR:[/bold red] An error occurred when installing packages")
-        pass
 
 if sys.argv[1] == "ubuntu":
-    ubuntu()
+    print("ubuntu", sys.argv[2])
+    ubuntu(arg=sys.argv[2])
