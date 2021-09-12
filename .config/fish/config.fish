@@ -1,18 +1,26 @@
-set fish_greeting                                 # Supresses fish's intro message
-set EDITOR "nvim ''"                 		  # $EDITOR use Nvim in terminal
-set VISUAL "codium "              		  # $VISUAL use VSCodium in GUI mode
+set fish_greeting                         # Supresses fish's intro message
+set EDITOR "nvim ''"                 	    # $EDITOR use Nvim in terminal
+set VISUAL "codium "              		    # $VISUAL use VSCodium in GUI mode
 
-welcome.py
+
+#welcome.py
 
 #
 # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
 #
-#colorscript random 
+colorscript random 
+
+# set the default nodejs version to the latest one available
+echo
+nvm install latest
 
 #
 # CUSTOM MANPAGER
 #
-set -x MANPAGER "sh -c 'col -bx | batcat -l man -p'" 
+set -x MANPAGER "sh -c 'col -bx | batcat -l man -p'"
+
+set -x SPICETIFY_INSTALL "/home/dark/spicetify-cli"
+set -x PATH "$SPICETIFY_INSTALL:$PATH"
 
 #
 # STARSHIP PROMPT
@@ -25,10 +33,21 @@ starship init fish | source
 #
 
 
-# alias e='vscodium ' 	# VSCodium name in ArchLinux
-alias e='codium ' 	# VSCodium name in Ubuntu
-alias l='exa -la '
+# alias e='vscodium ' 	                      # VSCodium name in ArchLinux
+alias e='codium ' 	                          # VSCodium name in Ubuntu
+alias l='exa -la '	                          # set an alias for the l key
 alias c='batcat '
-alias cat='c '
-alias vim='nvim '	# Replace vim by neovim
-alias vi='nvim '	# Replace vi by neovim
+
+#alias cat='batcat '
+
+alias vim='nvim '	                            # Replace vim by neovim
+alias vi='nvim '	                            # Replace vi by neovim
+alias ls='exa '		                            # Replace ls by exa
+alias python='python3 '
+
+alias k="kubectl "                            # Alias for kuebctl
+alias kscan="kubescape scan framework nsa "   # Alias for the scanning k8s clusters
+
+alias tn="tmux new "                          # Create a new tmux session easly
+alias ta="tmux attach "                       # Attach a tmux session easly
+alias tk="tmux kill-session -t "              # Shortenf to dete tmux session

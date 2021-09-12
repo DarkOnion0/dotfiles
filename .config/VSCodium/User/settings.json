@@ -1,9 +1,0 @@
-{
-    "todo-tree.tree.showScanModeButton": false,
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "One Dark Pro",
-    "files.autoSave": "afterDelay",
-    "git.autofetch": true,
-    "files.autoSaveDelay": 100,
-    "editor.fontLigatures": true
-}
