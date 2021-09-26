@@ -9,54 +9,45 @@ ubuntu:
 
   repos:
     # "version-21.04":
-    - spotify-repo:
-        Version: all
-        commands:
-          - curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
-          - echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list \
+    - Version: all
+      commands:
+        - curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
+        - echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list \
       #- sudo apt-get update && sudo apt-get install spotify-client
-    - vscodium-repo:
-        Version: all
-        commands:
-          - wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium.gpg
-          - echo 'deb https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list.d/vscodium.list
-    - lutris-repo:
-        Version: all
-        commands:
-          - sudo add-apt-repository -y ppa:lutris-team/lutris
-    - element-repo:
-        Version: all
-        commands:
-          - sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
-          - echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" | sudo tee /etc/apt/sources.list.d/riot-im.list
-    - docker-repo:
-        Version: all
-        commands:
-          - sudo apt-get remove -y docker docker-engine docker.io containerd runc
-          - sudo apt install -y curl && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          - echo "This is the the fingerprint from the docker repo ===> 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
-          - sudo apt-key fingerprint 0EBFCD88
-          - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    - signal-repo:
-        Version: all
-        commands:
-          - wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
-          - echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
-    - k8s-repo:
-        Version: all
-        commands:
-          - sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
-          - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-          - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-    - brave-browser:
-        Version: all
-        commands:
-          - sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-          - echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    - alacritty:
-        Version: all
-        commands:
-          - sudo add-apt-repository ppa:aslatter/ppa
+    - Version: all
+      commands:
+        - wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/vscodium.gpg
+        - echo 'deb https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list.d/vscodium.list
+    - Version: all
+      commands:
+        - sudo add-apt-repository -y ppa:lutris-team/lutris
+    - Version: all
+      commands:
+        - sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
+        - echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" | sudo tee /etc/apt/sources.list.d/riot-im.list
+    - Version: all
+      commands:
+        - sudo apt-get remove -y docker docker-engine docker.io containerd runc
+        - sudo apt install -y curl && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        - echo "This is the the fingerprint from the docker repo ===> 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
+        - sudo apt-key fingerprint 0EBFCD88
+        - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    - Version: all
+      commands:
+        - wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+        - echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+    - Version: all
+      commands:
+        - sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+        - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+        - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+    - Version: all
+      commands:
+        - sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        - echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    - Version: all
+      commands:
+        - sudo add-apt-repository ppa:aslatter/ppa
 
   packages:
     - exa
