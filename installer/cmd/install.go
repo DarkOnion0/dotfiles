@@ -278,7 +278,7 @@ func downloadRepo(os string) {
 
 	if alreadyDownloaded {
 		fmt.Println("📂 updating GitHub repo...")
-		out, err := exec.Command("git", "pull", "/tmp/dotfiles").Output()
+		out, err := exec.Command("git", "pull", "/tmp/dotfiles/").Output()
 
 		if err != nil {
 
