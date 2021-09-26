@@ -25,10 +25,9 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 
 	"github.com/fatih/color"
-
-	"github.com/goccy/go-yaml"
 )
 
 // installCmd represents the install command
@@ -44,16 +43,6 @@ var installCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(installCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// installCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// installCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // TYPE
@@ -76,11 +65,16 @@ type osListT struct {
 	ubuntu []string
 }
 
+type repositoryT struct {
+	Commands []string
+	Version  string
+}
+
 type packageYamlT struct {
 	Ubuntu struct {
 		Prerequisites []string
-		Repos         []string
-		Package       []string
+		Repos         []repositoryT
+		Packages []string
 	}
 }
 
@@ -179,9 +173,12 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 
 			packageList := packageYamlT{}
 
-			if err := yaml.Unmarshal([]byte(data), &packageList); err != nil {
-				fmt.Printf("%s", packageList)
+			err := yaml.Unmarshal([]byte(data), &packageList)
+			if err != nil {
+				log.Fatalf("error: %v", err)
 			}
+			fmt.Println(packageList.Ubuntu.Repos[0].Version)
+
 		}
 	}
 }
@@ -263,35 +260,15 @@ func downloadRepo(os string) {
 		return
 	}
 
-	files, err := ioutil.ReadDir("/tmp/")
-	alreadyDownloaded := false
+	fmt.Println("📂 downloading GitHub repo...")
+	out, err := exec.Command("rm", "-rf", "/tmp/dotfiles").Output()
 
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, f := range files {
-		if f.Name() == "dotfiles" {
-			alreadyDownloaded = true
-		}
-	}
-
-	if alreadyDownloaded {
-		fmt.Println("📂 updating GitHub repo...")
-		out, err := exec.Command("git", "pull", "/tmp/dotfiles/").Output()
-
-		if err != nil {
-
-			fmt.Printf("\n%s", err)
-			output := string(out[:])
-			fmt.Println(output)
-
-		} else {
-			fmt.Println("📂 updating GitHub repo finished successfully !!!")
-		}
+		fmt.Printf("\n%s", err)
+		output := string(out[:])
+		fmt.Println(output)
 	} else {
 
-		fmt.Println("📂 downloading GitHub repo...")
 		out, err := exec.Command("git", "clone", "https://github.com/DarkOnion0/dotfiles.git", "/tmp/dotfiles").Output()
 
 		if err != nil {
@@ -304,4 +281,5 @@ func downloadRepo(os string) {
 			fmt.Println("📂 downloading GitHub repo finished successfully !!!")
 		}
 	}
+
 }
