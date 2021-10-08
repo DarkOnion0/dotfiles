@@ -45,8 +45,9 @@ func init() {
 	rootCmd.AddCommand(installCmd)
 }
 
-// TYPE
-
+//////////
+// TYPE //
+//////////
 type answersInstallT struct {
 	Hostname string
 	Os       string
@@ -65,20 +66,22 @@ type osListT struct {
 	ubuntu []string
 }
 
+// INSTALL FILE TYPE
+
 type repositoryT struct {
 	Commands []string
 	Version  string
 }
 
 type packageYamlT struct {
-	Ubuntu struct {
-		Prerequisites []string
-		Repos         []repositoryT
-		Packages []string
-	}
+	Ubuntu packageYamlOST
 }
 
-// type callBackT string
+type packageYamlOST struct {
+	Prerequisites []string
+	Repos         []repositoryT
+	Packages      []string
+}
 
 func launchInstaller() {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
@@ -163,6 +166,11 @@ func launchInstaller() {
 }
 
 func installPackage(os, version string, wantToInstallPackage bool) {
+	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
+	selectedPackage := packageYamlOST{}
+	osInstallCmd := ""
+	osInstallParams := ""
+
 	if wantToInstallPackage {
 		data, err := ioutil.ReadFile("/tmp/dotfiles/installer/package.yaml")
 
@@ -177,7 +185,65 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 			if err != nil {
 				log.Fatalf("error: %v", err)
 			}
-			fmt.Println(packageList.Ubuntu.Repos[0].Version)
+
+			if os == "ubuntu" {
+				selectedPackage.Prerequisites = packageList.Ubuntu.Prerequisites
+				selectedPackage.Repos = packageList.Ubuntu.Repos
+				selectedPackage.Packages = packageList.Ubuntu.Packages
+				osInstallCmd = "apt"
+				osInstallParams = "install"
+			}
+
+			statusDisplay.Println("\n📥 downloading prerequisites...")
+
+			for i := 0; i < len(selectedPackage.Prerequisites); i++ {
+				out, err := exec.Command(osInstallCmd, osInstallParams, selectedPackage.Prerequisites[i]).Output()
+
+				if err != nil {
+					fmt.Printf("\n%s", err)
+					output := string(out[:])
+					fmt.Println(output)
+				}
+			}
+
+			statusDisplay.Println("📥 downloading prerequisites finished successfully !!!")
+
+			statusDisplay.Println("\n🗄️ adding repos...")
+
+			for i := 0; i < len(selectedPackage.Repos); i++ {
+
+				if selectedPackage.Repos[i].Version == "all" || selectedPackage.Repos[i].Version == version {
+
+					for i2 := 0; i2 < len(selectedPackage.Repos[i].Commands); i2++ {
+
+						out, err := exec.Command("/bin/sh", "-c", selectedPackage.Repos[i].Commands[i2]).Output()
+
+						//fmt.Println(i, i2, selectedPackage.Repos[i].Commands[i2], len(selectedPackage.Repos[i].Commands))
+
+						if err != nil {
+							fmt.Printf("\n%s", err)
+							output := string(out[:])
+							fmt.Println(output)
+						}
+					}
+				}
+			}
+
+			statusDisplay.Println("\n🗄️ adding repos finished successfully !!!")
+
+			statusDisplay.Println("\n📦 installing packages...")
+
+			for i := 0; i < len(selectedPackage.Packages); i++ {
+				out, err := exec.Command("/bin/sh", "-c", selectedPackage.Packages[i]).Output()
+
+				if err != nil {
+					fmt.Printf("\n%s", err)
+					output := string(out[:])
+					fmt.Println(output)
+				}
+			}
+
+			statusDisplay.Println("\n📦 installing packages finished successfully")
 
 		}
 	}
@@ -242,9 +308,11 @@ func backupFile(oldPath, newPath string) {
 }
 
 func downloadRepo(os string) {
+	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
+
 	if os == "ubuntu" {
-		fmt.Println("\n💾 installing git...")
-		out, err := exec.Command("apt", "install", "git").Output()
+		statusDisplay.Println("\n💾 installing git and bash...")
+		out, err := exec.Command("apt", "install", "git", "bash").Output()
 
 		if err != nil {
 
@@ -253,14 +321,14 @@ func downloadRepo(os string) {
 			fmt.Println(output)
 
 		} else {
-			fmt.Println("💾 installing git finished successfully !!!")
+			statusDisplay.Println("💾 installing git and bash finished successfully !!!")
 		}
 	} else {
 		fmt.Printf("Your os %q is not supported", os)
 		return
 	}
 
-	fmt.Println("📂 downloading GitHub repo...")
+	statusDisplay.Println("📂 downloading GitHub repo...")
 	out, err := exec.Command("rm", "-rf", "/tmp/dotfiles").Output()
 
 	if err != nil {
@@ -278,8 +346,7 @@ func downloadRepo(os string) {
 			fmt.Println(output)
 
 		} else {
-			fmt.Println("📂 downloading GitHub repo finished successfully !!!")
+			statusDisplay.Println("📂 downloading GitHub repo finished successfully !!!")
 		}
 	}
-
 }
