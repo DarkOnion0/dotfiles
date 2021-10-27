@@ -68,6 +68,8 @@ type packageYamlOST struct {
 	Packages      []string
 }
 
+// launchInstaller launch the install script by asking basics question to the user to install prerequisites and some distro specific actions.
+// It also do some basics stuff that should be ask first (even if I did that, it should be avoided 😅).
 func launchInstaller() {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
@@ -149,6 +151,11 @@ func launchInstaller() {
 	}
 }
 
+// This function handle all the things relative to installing package from the package.yaml file.
+// PARAMATERS:
+//============
+// The os name should be the same as in the osListT type
+// wantToInstallPackage | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
 func installPackage(os, version string, wantToInstallPackage bool) {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 	selectedPackage := packageYamlOST{}
@@ -233,6 +240,10 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 	}
 }
 
+// This function handle all the things relative to importing dotfiles present in this repo from the package.yaml file.
+// PARAMATERS:
+//============
+// wantToImportConfiguration | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
 func importConfiguration(wantToImportConfiguration bool) {
 	fmt.Println("importConfiguration")
 
@@ -260,6 +271,8 @@ func importConfiguration(wantToImportConfiguration bool) {
 	}
 }
 
+// This function modify or not the current hostname of the linux box.
+// The function execute only if the hostname length  different than 0
 func editHostname(hostname string) {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
@@ -288,6 +301,8 @@ func editHostname(hostname string) {
 	}
 }
 
+// This function is there to backup file. Therefor if the user execute the script and note that it he didn't backup his most precious dotfiles and that the script changed them. 
+// He can always recover them
 func backupFile(oldPath, newPath string) {
 	e := os.Rename(oldPath, newPath)
 	if e != nil {
@@ -295,6 +310,10 @@ func backupFile(oldPath, newPath string) {
 	}
 }
 
+// This function is badlynamed and his role in th whole project is just to download the prerequisites needed by the script (git and bash)
+// PARAMATERS:
+//============
+// The os name should be the same as in the osListT type
 func downloadRepo(os string) {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
