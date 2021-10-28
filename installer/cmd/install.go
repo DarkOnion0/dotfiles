@@ -163,7 +163,7 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 	osInstallParams := ""
 
 	if wantToInstallPackage {
-		data, err := ioutil.ReadFile("/tmp/dotfiles/installer/package.yaml")
+		data, err := ioutil.ReadFile("/tmp/dotfiles/package.yaml")
 
 		if err != nil {
 			fmt.Printf("\n%s", err)
@@ -240,12 +240,12 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 	}
 }
 
-// This function handle all the things relative to importing dotfiles present in this repo from the package.yaml file.
+// This function handle all the things relative to importing dotfiles present in this repo from the dotfiles.yaml file.
 // PARAMATERS:
 //============
 // wantToImportConfiguration | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
 func importConfiguration(wantToImportConfiguration bool) {
-	fmt.Println("importConfiguration")
+	// fmt.Println("importConfiguration", wantToImportConfiguration)
 
 	if wantToImportConfiguration {
 
@@ -256,7 +256,7 @@ func importConfiguration(wantToImportConfiguration bool) {
 				Name: "SelectedConfiguration",
 				Prompt: &survey.Select{
 					Message: "Choose your configuration file to import:",
-					// Options: osList.ubuntu,
+					Options: []string{},
 					// Default: osList.ubuntu[0],
 				},
 			},
@@ -301,7 +301,7 @@ func editHostname(hostname string) {
 	}
 }
 
-// This function is there to backup file. Therefor if the user execute the script and note that it he didn't backup his most precious dotfiles and that the script changed them. 
+// This function is there to backup file. Therefor if the user execute the script and note that it he didn't backup his most precious dotfiles and that the script changed them.
 // He can always recover them
 func backupFile(oldPath, newPath string) {
 	e := os.Rename(oldPath, newPath)
