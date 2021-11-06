@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
@@ -31,46 +32,75 @@ func init() {
 }
 
 //////////
-// TYPE //
+// TYPES //
 //////////
+
 type answersInstallT struct {
-	Hostname string
-	Os       string
+	Hostname string // This is the new hostname selected by the user. This value will be passed to the editHostname function
+	Os       string // It's the current os where the script is running. This value will be defined by the user and not automatically
+	HomeDir  string // The user home directory
 }
 
+// This the type for the answer to the ubuntu survey
 type answersUbuntuT struct {
-	InstallPackage      bool
-	ImportConfiguration bool
-	SelectedVersion     string `survey:"version"`
+	InstallPackage      bool   // This is passed to the installPackage function to know if it should be activated or not
+	ImportConfiguration bool   // This is passed to the importConfiguration function to know if it should be activated or not
+	SelectedVersion     string `survey:"version"` // This is the selected version of ubuntu
 }
 
-type answersConfigurationT struct {
-	SelectedConfiguration []string
-}
+// This defined the variables of which os is supperted with which versions (it can be empty for rolling release like Arch).
+// This type also defined how the os name in the whole programme should be written (with the same typo).
+//
+// WARNING: any modification made to this files must also be made to the packageYamlT type with the SAME name !!!
 type osListT struct {
 	ubuntu []string
 }
 
-// INSTALL FILE TYPE
+// INSTALL FILE TYPES
 
+// This defined the structure of a valid repository element in the package.yaml file
 type repositoryT struct {
 	Commands []string
 	Version  string
 }
 
+// This defined all the supported os in the package.yaml file
+//
+// WARNING: any modification made to this files must also be made to the osListT type with the SAME name !!!
 type packageYamlT struct {
 	Ubuntu packageYamlOST
 }
 
+// This defined how all os present in the packageYamlT type should looks like (even if a feature is not used)
 type packageYamlOST struct {
 	Prerequisites []string
 	Repos         []repositoryT
 	Packages      []string
 }
 
+// DOTFILES TYPES
+
+// This defined how the dotfiles.yaml must looks like
+type dotfilesYamlT []dotfilesElementYamlT
+
+// This defined how all the element present in the dotfilesYamlT list must looks like
+type dotfilesElementYamlT struct {
+	LocalDirectory string `yaml:"localDirectory"`
+	RepoDirectory  string `yaml:"repoDirectory"`
+}
+
+// ENV VARIABLES
+var dotfilesDir = os.Getenv("DOTFILES_DIR")
+
 // launchInstaller launch the install script by asking basics question to the user to install prerequisites and some distro specific actions.
 // It also do some basics stuff that should be ask first (even if I did that, it should be avoided 😅).
 func launchInstaller() {
+
+	if len(dotfilesDir) == 0 {
+		dotfilesDir = "/tmp/dotfiles"
+		//fmt.Println("applying default value to dotfilesDir var")
+	}
+
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
 	osList := osListT{ubuntu: []string{"21.04"}}
@@ -81,6 +111,12 @@ func launchInstaller() {
 		{
 			Name:   "hostname",
 			Prompt: &survey.Input{Message: "Defined a machine hostname (leave it blank to change anything):"},
+			//Validate: survey.Required,
+			Transform: survey.Title,
+		},
+		{
+			Name:   "homeDir",
+			Prompt: &survey.Input{Message: "Your home directory :"},
 			//Validate: survey.Required,
 			Transform: survey.Title,
 		},
@@ -99,6 +135,12 @@ func launchInstaller() {
 	if err != nil {
 		fmt.Println("error during setup :", err.Error())
 		return
+	} else {
+		_, err := os.Stat(strings.ToLower(answersInstall.HomeDir))
+		//fmt.Println(answersInstall.HomeDir)
+		if os.IsNotExist(err) {
+			log.Fatalf("The home directory '%s' is not defined", answersInstall.HomeDir)
+		}
 	}
 
 	if answersInstall.Os == "archlinux" {
@@ -140,7 +182,7 @@ func launchInstaller() {
 		}
 		downloadRepo(answersInstall.Os)
 		installPackage(answersInstall.Os, answerUbuntu.SelectedVersion, answerUbuntu.InstallPackage)
-		importConfiguration(answerUbuntu.ImportConfiguration)
+		importConfiguration(answerUbuntu.ImportConfiguration, strings.ToLower(answersInstall.HomeDir))
 		if answersInstall.Hostname != "" {
 			editHostname(answersInstall.Hostname)
 		}
@@ -152,11 +194,10 @@ func launchInstaller() {
 }
 
 // This function handle all the things relative to installing package from the package.yaml file.
-// PARAMATERS:
-//============
-// The os name should be the same as in the osListT type
-// wantToInstallPackage | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
-func installPackage(os, version string, wantToInstallPackage bool) {
+//
+// 	- The os name should be the same as in the osListT type
+// 	- wantToInstallPackage | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
+func installPackage(osName, version string, wantToInstallPackage bool) {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 	selectedPackage := packageYamlOST{}
 	osInstallCmd := ""
@@ -177,7 +218,7 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 				log.Fatalf("error: %v", err)
 			}
 
-			if os == "ubuntu" {
+			if osName == "ubuntu" {
 				selectedPackage.Prerequisites = packageList.Ubuntu.Prerequisites
 				selectedPackage.Repos = packageList.Ubuntu.Repos
 				selectedPackage.Packages = packageList.Ubuntu.Packages
@@ -241,32 +282,54 @@ func installPackage(os, version string, wantToInstallPackage bool) {
 }
 
 // This function handle all the things relative to importing dotfiles present in this repo from the dotfiles.yaml file.
-// PARAMATERS:
-//============
-// wantToImportConfiguration | it is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
-func importConfiguration(wantToImportConfiguration bool) {
-	// fmt.Println("importConfiguration", wantToImportConfiguration)
+//
+// 	- wantToImportConfiguration | It is the answer of the question ask in the launchInstaller function that conditioned if the function will be executed or not
+func importConfiguration(wantToImportConfiguration bool, homeDir string) {
+	//fmt.Println(dotfilesDir)
+	//fmt.Println("importConfiguration :", wantToImportConfiguration)
+	//fmt.Println("homeDir :", homeDir)
+	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
 	if wantToImportConfiguration {
 
-		answersConfiguration := answersConfigurationT{}
-
-		var qsConfiguration = []*survey.Question{
-			{
-				Name: "SelectedConfiguration",
-				Prompt: &survey.Select{
-					Message: "Choose your configuration file to import:",
-					Options: []string{},
-					// Default: osList.ubuntu[0],
-				},
-			},
-		}
-
-		err := survey.Ask(qsConfiguration, &answersConfiguration)
+		dataDotfiles, err := ioutil.ReadFile("/tmp/dotfiles/dotfiles.yaml")
 
 		if err != nil {
-			fmt.Println(err.Error())
+			fmt.Printf("\n%s", err)
 			return
+		} else {
+			statusDisplay.Println("\n📑 importing dotfiles...")
+
+			dotfilesList := dotfilesYamlT{}
+
+			err := yaml.Unmarshal(dataDotfiles, &dotfilesList)
+			if err != nil {
+				log.Fatalf("error: %v", err)
+			}
+
+			//fmt.Println("dotfiles --> ", dotfilesList[0].LocalDirectory)
+			//fmt.Println(string(dataDotfiles[:]))
+
+			for i := 0; i < len(dotfilesList); i++ {
+
+				_, errFile := os.Stat(path.Join(homeDir, dotfilesList[i].LocalDirectory))
+
+				if errFile == nil {
+					backupFile(path.Join(homeDir, dotfilesList[i].LocalDirectory), path.Join(homeDir, dotfilesList[i].LocalDirectory+".old"))
+				}
+
+				command := fmt.Sprintf("cp %s %s", path.Join("/tmp/dotfiles", dotfilesList[i].RepoDirectory), path.Join(homeDir, path.Dir(dotfilesList[i].LocalDirectory)))
+				//fmt.Println(command)
+				//fmt.Println(path.Dir(dotfilesList[i].RepoDirectory))
+				//fmt.Println(path.Join(os.Getenv("HOME"), dotfilesList[i].RepoDirectory+".old"))
+				out, err := exec.Command("/bin/sh", "-c", command).Output()
+
+				if err != nil {
+					fmt.Println(string(out[:]))
+					log.Fatalf("error: %s", err)
+				}
+			}
+			statusDisplay.Println("📑 importing dotfiles finished successfully !!!")
 		}
 	}
 }
@@ -289,10 +352,10 @@ func editHostname(hostname string) {
 
 		defer file.Close()
 
-		len, err := file.WriteString(strings.ToLower(hostname))
+		fileLen, err := file.WriteString(strings.ToLower(hostname))
 
 		if err != nil {
-			fmt.Printf("\nLength: %d bytes", len)
+			fmt.Printf("\nLength: %d bytes", fileLen)
 			fmt.Printf("\nFile Name: %s", file.Name())
 			log.Fatalf("failed writing to file: %s", err)
 		} else {
@@ -301,8 +364,7 @@ func editHostname(hostname string) {
 	}
 }
 
-// This function is there to backup file. Therefor if the user execute the script and note that it he didn't backup his most precious dotfiles and that the script changed them.
-// He can always recover them
+// This function is there to backup file. Therefor if the user execute the script and note that it he didn't backup his most precious dotfiles and that the script changed them. So he can always recover them
 func backupFile(oldPath, newPath string) {
 	e := os.Rename(oldPath, newPath)
 	if e != nil {
@@ -310,10 +372,9 @@ func backupFile(oldPath, newPath string) {
 	}
 }
 
-// This function is badlynamed and his role in th whole project is just to download the prerequisites needed by the script (git and bash)
-// PARAMATERS:
-//============
-// The os name should be the same as in the osListT type
+// This function is badlynamed and his role in the whole project is just to download the prerequisites needed by the script (git and bash)
+//
+// 	- The os name should be the same as in the osListT type
 func downloadRepo(os string) {
 	statusDisplay := color.New(color.FgWhite).Add(color.Bold)
 
