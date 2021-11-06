@@ -229,7 +229,7 @@ func installPackage(osName, version string, wantToInstallPackage bool) {
 			statusDisplay.Println("\n📥 downloading prerequisites...")
 
 			for i := 0; i < len(selectedPackage.Prerequisites); i++ {
-				fmt.Printf("%s\n", selectedPackage.Prerequisites[i])
+				fmt.Printf("\n%s", selectedPackage.Prerequisites[i])
 				out, err := exec.Command("/bin/sh", "-c", fmt.Sprintf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Prerequisites[i])).Output()
 
 				if err != nil {
@@ -267,7 +267,7 @@ func installPackage(osName, version string, wantToInstallPackage bool) {
 			statusDisplay.Println("\n📦 installing packages...")
 
 			for i := 0; i < len(selectedPackage.Packages); i++ {
-				fmt.Printf("%s\n", selectedPackage.Packages[i])
+				fmt.Printf("\n%s", selectedPackage.Packages[i])
 				out, err := exec.Command("/bin/sh", "-c", fmt.Sprintf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Packages[i])).Output()
 
 				if err != nil {
@@ -320,8 +320,8 @@ func importConfiguration(wantToImportConfiguration bool, homeDir string) {
 					backupFile(path.Join(homeDir, dotfilesList[i].LocalDirectory), path.Join(homeDir, dotfilesList[i].LocalDirectory+".old"))
 				}
 
-				command := fmt.Sprintf("cp %s %s", path.Join("/tmp/dotfiles", dotfilesList[i].RepoDirectory), path.Join(homeDir, path.Dir(dotfilesList[i].LocalDirectory)))
-				//fmt.Println(command)
+				command := fmt.Sprintf("mkdir -p %s && cp %s %s", path.Join(homeDir, path.Dir(dotfilesList[i].LocalDirectory)), path.Join("/tmp/dotfiles", dotfilesList[i].RepoDirectory), path.Join(homeDir, path.Dir(dotfilesList[i].LocalDirectory)))
+				fmt.Println(command)
 				//fmt.Println(path.Dir(dotfilesList[i].RepoDirectory))
 				//fmt.Println(path.Join(os.Getenv("HOME"), dotfilesList[i].RepoDirectory+".old"))
 				out, err := exec.Command("/bin/sh", "-c", command).Output()
