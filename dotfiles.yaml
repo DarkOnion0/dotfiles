@@ -1,0 +1,5 @@
+- localDirectory: "$HOME/.config/starship.toml"
+  repoDirectory: ".config/starship.toml"
+
+- localDirectory:
+  repoDirectory:
