@@ -223,13 +223,14 @@ func installPackage(osName, version string, wantToInstallPackage bool) {
 				selectedPackage.Repos = packageList.Ubuntu.Repos
 				selectedPackage.Packages = packageList.Ubuntu.Packages
 				osInstallCmd = "apt"
-				osInstallParams = "install"
+				osInstallParams = "install -y"
 			}
 
 			statusDisplay.Println("\n📥 downloading prerequisites...")
 
 			for i := 0; i < len(selectedPackage.Prerequisites); i++ {
-				out, err := exec.Command(osInstallCmd, osInstallParams, selectedPackage.Prerequisites[i]).Output()
+				fmt.Printf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Prerequisites[i])
+				out, err := exec.Command("/bin/sh", "-c", fmt.Sprintf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Prerequisites[i])).Output()
 
 				if err != nil {
 					fmt.Printf("\n%s", err)
@@ -266,7 +267,8 @@ func installPackage(osName, version string, wantToInstallPackage bool) {
 			statusDisplay.Println("\n📦 installing packages...")
 
 			for i := 0; i < len(selectedPackage.Packages); i++ {
-				out, err := exec.Command("/bin/sh", "-c", selectedPackage.Packages[i]).Output()
+				fmt.Printf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Packages[i])
+				out, err := exec.Command("/bin/sh", "-c", fmt.Sprintf("%s %s %s", osInstallCmd, osInstallParams, selectedPackage.Packages[i])).Output()
 
 				if err != nil {
 					fmt.Printf("\n%s", err)
@@ -380,7 +382,7 @@ func downloadRepo(os string) {
 
 	if os == "ubuntu" {
 		statusDisplay.Println("\n💾 installing git and bash...")
-		out, err := exec.Command("apt", "install", "git", "bash").Output()
+		out, err := exec.Command("apt", "install", "-y", "git", "bash").Output()
 
 		if err != nil {
 
