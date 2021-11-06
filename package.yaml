@@ -75,7 +75,7 @@ ubuntu:
     - docker-ce-cli
     - flatpak
     - gimp
-    - wireshark-qt
+    #- wireshark-qt
     - flameshot
     - signal-desktop
     - whois
