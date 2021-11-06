@@ -1,2 +1,4 @@
-- localDirectory: $HOME/.config/starship.toml
+# the localDirectory file path begin in the user home dir
+
+- localDirectory: .config/starship.toml
   repoDirectory: home/.config/starship.toml
