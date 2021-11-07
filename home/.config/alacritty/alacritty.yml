@@ -433,9 +433,9 @@ font:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /bin/fish
+  program: /run/current-system/sw/bin/fish
   args:
-    - --command=tmux new
+    - --command=tmux attach -t default-session || tmux new -s default-session
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
