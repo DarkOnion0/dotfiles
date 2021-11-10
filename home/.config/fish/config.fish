@@ -4,6 +4,7 @@ set VISUAL "codium "              		    	# $VISUAL use VSCodium in GUI mode
 
 
 #welcome.py
+neofetch
 
 #
 # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
@@ -55,4 +56,5 @@ alias tk="tmux kill-session -t "              # Shortenf to dete tmux session
 alias nixos-edit="sudo nvim /etc/nixos/configuration.nix"
 alias nixos-switch="sudo nixos-rebuild switch"
 alias nixos-clear="sudo nix-collect-garbage"
+alias nixos-delroot="sudo nix-collect-garbage -d"
 alias nixos-update="sudo nixos-rebuild switch --upgrade"
