@@ -14,11 +14,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  #############
+  ## Network ##
+  #############
+
   networking.hostName = "onion"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -29,6 +30,13 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  
+  ##############################
+  ## Time & Local preferences ##
+  ##############################
+
+  # Set your time zone.
+  time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
@@ -36,6 +44,10 @@
     font = "Lat2-Terminus16";
     keyMap = "fr";
   };
+
+  #########
+  ## X11 ##
+  #########
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -59,18 +71,33 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  ##############################
+  ## User Account (groups...) ##
+  ##############################
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dark = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
   # Global user settings
   users.defaultUserShell = pkgs.fish;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  
+  ################################################################
+  ## List packages installed in system profile. To search, run: ##
+  ## $ nix search wget                                          ##
+  ################################################################
+  
+  # Enable automatic garbage collector
+  nix.gc.automatic = true;
+  nix.gc.dates = "weekly";
+	
+  # Enable unfree pkgs
   nixpkgs.config.allowUnfree = true;
+
+  # Package list
+
   environment.systemPackages = with pkgs; [
     # Command line and console stuff
     alacritty
@@ -92,6 +119,7 @@
     # Backup tool
     restic
     syncthing
+    gparted
     
     # WebBrowser
     firefox
@@ -104,11 +132,13 @@
     libsForQt5.kcalc
     libsForQt5.filelight
     libsForQt5.qt5.qttools
+    libsForQt5.akonadi
 
     # Office
     libreoffice-still
     teams
     drawio
+    flameshot
 
     # Chat
     element-desktop
@@ -123,9 +153,10 @@
     vscodium
     jetbrains.idea-ultimate
 
-    # Programming lang
+    # Programming stuff
     go
     python3
+    docker
 
     # Server
     kubectl
@@ -151,6 +182,9 @@
   # Fish config
   programs.fish.enable = true;
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -159,10 +193,23 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
+  ############################################
+  ## List services that you want to enable: ##
+  ############################################
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable syncthing
+  services = {
+    syncthing = {
+        enable = true;
+        user = "dark";
+        #dataDir = "/home/myusername/Documents";
+        configDir = "/home/dark/.config/syncthing";
+    };
+  };
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
