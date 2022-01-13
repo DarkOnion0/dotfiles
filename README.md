@@ -57,7 +57,4 @@ You can use the [`go cli`](./installer) to use my dotfiles but it's always in he
 ├── package.yaml                        # my cli packages list
 ├── README.md                           # this file :)
 └── updater.sh                          # the update script (DEPRECATED)
-
-7 directories, 33 files
-
 ```
