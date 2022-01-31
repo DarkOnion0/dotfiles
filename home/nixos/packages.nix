@@ -5,11 +5,11 @@
   ## List packages installed in system profile. To search, run: ##
   ## $ nix search wget                                          ##
   ################################################################
-  
+
   # Enable automatic garbage collector
   nix.gc.automatic = true;
   nix.gc.dates = "weekly";
-	
+
   # Enable unfree pkgs
   nixpkgs.config.allowUnfree = true;
 
@@ -20,7 +20,7 @@
     fish
     starship
     powerline
-    
+
     # CLI
     curl
     killall
@@ -33,7 +33,7 @@
     exa
     bat
     tree
-    
+
     # Terminal app
     alacritty
     tmux
@@ -42,7 +42,7 @@
     restic
     syncthing
     gparted
-    
+
     # WebBrowser
     firefox
     brave
@@ -75,24 +75,30 @@
 
     # NixOS tools
     nixpkgs-review
+    nixpkgs-fmt
 
     # Office
     libreoffice-still
     #teams
     drawio
     flameshot
+    anki
+
+    # Printing
+    cups
+    gutenprint
 
     # Chat
     element-desktop
     discord
-    electron-mail
-    
+    #electron-mail
+
     # Security
     keepassxc
     wireshark
     arp-scan
     openssl
-    
+
     # Editor 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     neovim
@@ -112,23 +118,27 @@
     gitkraken
     dbeaver
     android-tools
-    dart
+    #dart
 
     # Server
     kubectl
     lens
     rpi-imager
-    etcher
+    #etcher
+    ansible
     #xrdp
-    
+
     # Gaming
     steam
-    multimc
+    #multimc
     corectrl
     lutris
     gnome.zenity
     wine-staging
     amdvlk
+    xterm
+    xdelta
+    #mindustry
 
     # Multimedia 
     spotify
@@ -136,8 +146,10 @@
     obs-studio
     libsForQt5.kdenlive
     gimp
+    freetube
 
     # Virtualisation
     waydroid
+    virt-manager
   ];
 }
