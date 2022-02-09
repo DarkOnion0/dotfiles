@@ -1,0 +1,21 @@
+[user]
+	name = DarkOnion0
+	email = Darkgenius1@protonmail.com
+
+[core]
+	editorgit = vim
+	editor = vim
+	pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	line-numbers = true
