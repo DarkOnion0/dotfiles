@@ -1,60 +1,71 @@
-set fish_greeting                         		# Supresses fish's intro message
-set EDITOR "nvim ''"                 	    		# $EDITOR use Nvim in terminal
-set VISUAL "codium "              		    	# $VISUAL use VSCodium in GUI mode
+#####################
+## STARSHIP PROMPT ##
+#####################
 
+starship init fish | source
+
+####################
+## Welcome scripts ##
+####################
 
 #welcome.py
+
 neofetch
 
-#
-# RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
-#
-#colorscript random 
+#colorscript random # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
 
 # set the default nodejs version to the latest one available
 #echo
 #nvm install latest
 
-#
-# CUSTOM MANPAGER
-#
-set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+###################
+## ENV Variables ##
+###################
 
-#set -x SPICETIFY_INSTALL "/home/dark/spicetify-cli"
-#set -x PATH "$SPICETIFY_INSTALL:$PATH"
+set fish_greeting											# Supresses fish's intro message
+set EDITOR "nvim ''"										# $EDITOR use Nvim in terminal
+set VISUAL "codium "										# $VISUAL use VSCodium in GUI mode
 
-#
-# STARSHIP PROMPT
-#
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"			# Custom manpager
 
-starship init fish | source
+###########
+## ALIAS ##
+###########
 
-#
-# ALIAS
-#
-
-
-# alias e='vscodium ' 	                      # VSCodium name in ArchLinux
-alias e='codium ' 	                          # VSCodium name in Ubuntu
-alias l='exa -la '	                          # set an alias for the l key
+# alias e='vscodium '										# VSCodium name in ArchLinux
+alias e='codium '											# VSCodium name in Ubuntu
+alias l='exa -la '											# set an alias for the l key
 alias c='bat '
 
 #alias cat='bat '
 
-alias vim='nvim '	                            # Replace vim by neovim
-alias vi='nvim '	                            # Replace vi by neovim
-alias ls='exa '		                            # Replace ls by exa
+alias vim='nvim '											# Replace vim by neovim
+alias vi='nvim '											# Replace vi by neovim
+alias ls='exa '												# Replace ls by exa
 alias python='python3 '
 
-alias k="kubectl "                            # Alias for kuebctl
-alias kscan="kubescape scan framework nsa "   # Alias for the scanning k8s clusters
+alias k="kubectl "											# Alias for kuebctl
+alias kscan="kubescape scan framework nsa "					# Alias for the scanning k8s clusters
 
-alias tn="tmux new "                          # Create a new tmux session easly
-alias ta="tmux attach "                       # Attach a tmux session easly
-alias tk="tmux kill-session -t "              # Shortenf to dete tmux session
+alias tn="tmux new "										# Create a new tmux session easly
+alias ta="tmux attach "										# Attach a tmux session easly
+alias tk="tmux kill-session -t	"							# Shortend to delete tmux session
 
-alias nixos-edit="sudo nvim /etc/nixos/configuration.nix"
-alias nixos-switch="sudo nixos-rebuild switch"
+alias nixos-edit="sudo nvim /etc/nixos/configuration.nix"	# Shortcut to edit my main nixos config gile
+alias nixos-switch="sudo nixos-rebuild switch"				# Shortcut to nixos command
 alias nixos-clear="sudo nix-collect-garbage"
 alias nixos-delroot="sudo nix-collect-garbage -d"
 alias nixos-update="sudo nixos-rebuild switch --upgrade"
+
+alias tmuxLaunch="tmux attach -t default-session || tmux new -s default-session"
+
+#alias dd="dd status=progress"								# Add the status progress by defauflt on the dd command
+
+alias lutris-wine="sudo sh -c 'sysctl -w abi.vsyscall32=0' && lutris" # Add the specific runtime option to lutris to run League Of Legends under linux
+
+alias g="git "												# Add an alias for git
+alias gs="git status "
+alias gl="git log "
+alias gc="git commit "
+alias gp="git push "
+alias gpl="git pull "
