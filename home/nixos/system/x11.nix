@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   # Enable the X11 windowing system.
@@ -6,8 +6,8 @@
 
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
 
   # Enable Gnome Desktop Environement
   #services.xserver.displayManager.gdm.enable = true;
@@ -17,8 +17,25 @@
   #qt5.enable = true;
   #qt5.platformTheme = "gtk2";
   #qt5.style = "gtk2";
+  programs.qt5ct.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "fr";
   services.xserver.xkbOptions = "eurosign:e";
+
+  # i3
+  services.xserver = {
+    desktopManager = {
+      xterm.enable = false;
+    };
+   
+    displayManager = {
+        defaultSession = "none+i3";
+    };
+
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
+  };
 }

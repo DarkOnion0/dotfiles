@@ -15,6 +15,8 @@
 
   # Package list
 
+  programs.seahorse.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Shell and prompt
     fish
@@ -51,27 +53,42 @@
     vivaldi-ffmpeg-codecs
 
     # KDE plasma
-    latte-dock
+    #latte-dock
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ark
     libsForQt5.kcalc
     libsForQt5.filelight
     libsForQt5.qt5.qttools
-    libsForQt5.akonadi
+    #libsForQt5.akonadi
     libsForQt5.okular
     libsForQt5.gwenview
     libsForQt5.karchive
-    libsForQt5.krunner
+    #libsForQt5.krunner
     #libsForQt5.kcolorpicker
     libsForQt5.kcolorchooser
-    libsForQt5.kwallet
-    libsForQt5.kwallet-pam
+    #libsForQt5.kwallet
+    #libsForQt5.kwallet-pam
+    libsForQt5.dolphin
+    libsForQt5.breeze-qt5
+
+    # i3
+    rofi
+    polybarFull
+    i3lock
+    picom
+    feh
+    pavucontrol
+    ncpamixer
+    dunst
+    lxappearance
+    blueman
 
     # Gnome
     #gnome.gnome-tweaks
     #gnomeExtensions.appindicator
     #gnomeExtensions.dash-to-dock
     #gnomeExtensions.floating-dock
+    gnome.gnome-keyring
 
     # NixOS tools
     nixpkgs-review
@@ -82,7 +99,10 @@
     #teams
     drawio
     flameshot
-    anki
+    anki-bin
+
+    # Productivity
+    ferdi
 
     # Printing
     cups
@@ -107,6 +127,7 @@
 
     # Programming stuff
     git
+    delta
     go
     nodejs-16_x
     python3
@@ -147,6 +168,7 @@
     libsForQt5.kdenlive
     gimp
     freetube
+    mpv
 
     # Virtualisation
     waydroid

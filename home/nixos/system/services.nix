@@ -8,10 +8,10 @@
   programs.fish.enable = true;
 
   # Enable Kwallet
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
-  };
+  #security.pam.services.kwallet = {
+  #  name = "kwallet";
+  #  enableKwallet = true;
+  #};
 
   # Enable some virtualisation software (Podman, docker...)
   virtualisation = {
@@ -72,4 +72,7 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  # Enable gnome keyring
+  services.gnome.gnome-keyring.enable = true;
 }
