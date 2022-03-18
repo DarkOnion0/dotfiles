@@ -19,3 +19,7 @@
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	line-numbers = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
