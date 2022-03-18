@@ -20,6 +20,7 @@
   environment.systemPackages = with pkgs; [
     # Shell and prompt
     fish
+    zsh
     starship
     powerline
 
@@ -35,6 +36,7 @@
     exa
     bat
     tree
+    viddy
 
     # Terminal app
     alacritty
@@ -82,6 +84,7 @@
     dunst
     lxappearance
     blueman
+    networkmanagerapplet
 
     # Gnome
     #gnome.gnome-tweaks
@@ -100,6 +103,7 @@
     drawio
     flameshot
     anki-bin
+    nextcloud-client
 
     # Productivity
     ferdi
@@ -118,6 +122,10 @@
     wireshark
     arp-scan
     openssl
+    nmap
+    kubescape
+    age
+    sops
 
     # Editor 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -130,6 +138,7 @@
     delta
     go
     nodejs-16_x
+    yarn
     python3
     gcc
     docker
@@ -143,6 +152,7 @@
 
     # Server
     kubectl
+    kubernetes-helm
     lens
     rpi-imager
     #etcher
@@ -159,6 +169,7 @@
     amdvlk
     xterm
     xdelta
+    minetest
     #mindustry
 
     # Multimedia 
@@ -173,5 +184,12 @@
     # Virtualisation
     waydroid
     virt-manager
+
+    # System
+    hardinfo
+    lm_sensors
+
+    # Blockchain
+    ethminer
   ];
 }

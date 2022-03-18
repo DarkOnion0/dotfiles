@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, services, pkgs, ... }:
 
 {
   #############
@@ -18,14 +18,26 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable NetworkManager
-  networking.networkmanager.enable = true;
-
   # Open ports in the firewall.
   #
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [ 3389 ];
+
+  #networking.networkmanager.enable = true;
+  
+  # Set default DNS 
+  networking = {
+    nameservers = [ "127.0.0.1" "::1" "192.168.1.23"];
+    resolvconf.enable = pkgs.lib.mkForce false;
+    # If using dhcpcd:
+    dhcpcd.extraConfig = "nohook resolv.conf";
+    # If using NetworkManager:
+    networkmanager.enable = true;
+    networkmanager.dns = "none";
+  };
+
+  services.resolved.enable = false;
 }

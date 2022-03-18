@@ -14,7 +14,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dark = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "networkmanager" "libvirtd" "wireshark" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 

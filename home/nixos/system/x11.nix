@@ -3,7 +3,20 @@
 {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # Enable OpenGL/OpenCL support
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+   rocm-opencl-icd
+   rocm-opencl-runtime
+   amdvlk
+  ];
+  
+  # Enable vulkan support
+  hardware.opengl.driSupport = true;
+  # For 32 bit applications
+  hardware.opengl.driSupport32Bit = true;
 
   # Enable the Plasma 5 Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
