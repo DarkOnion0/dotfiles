@@ -10,7 +10,7 @@ starship init fish | source
 
 #welcome.py
 
-neofetch
+#neofetch
 
 #colorscript random # RANDOM COLORSCHEME ==> https://gitlab.com/dwt1/shell-color-scripts
 
@@ -45,6 +45,7 @@ alias ls='exa '												# Replace ls by exa
 alias python='python3 '
 
 alias k="kubectl "											# Alias for kuebctl
+alias h="helm "												# Alias for helm
 alias kscan="kubescape scan framework nsa "					# Alias for the scanning k8s clusters
 
 alias tn="tmux new "										# Create a new tmux session easly
