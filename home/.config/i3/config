@@ -163,12 +163,16 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show window -icon-theme "Papirus
 # launch flameshot
 bindsym $mod+p exec flameshot gui
 
+# Lock the screen
+bindsym $mod+l exec i3lock
+
 ######################
 ## CUSTOM AUTOSTART ##
 ######################
 exec_always --no-startup-id feh --recursive --bg-fill --randomize ~/.wallpapers					# launch random background
 exec_always --no-startup-id picom -b															# launch the compositor
 exec_always --no-startup-id $HOME/Programmation/git/dotfiles/home/.config/polybar/launch.sh		# launch polybar
+exec_always --no-startip-id nm-applet															# launch a little applet to manage internet conenction
 exec --no-startup-id corectrl																	# launch corectrl for managing my GPU
 exec --no-startip-id flameshot																	# launch my screen capture application
 exec --no-startip-id keepassxc																	# launch my password manager
