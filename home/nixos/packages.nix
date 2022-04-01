@@ -15,7 +15,7 @@
 
   # Package list
 
-  programs.seahorse.enable = true;
+  programs.seahorse.enable = false;
 
   environment.systemPackages = with pkgs; [
     # Shell and prompt
@@ -37,6 +37,7 @@
     bat
     tree
     viddy
+    p7zip
 
     # Terminal app
     alacritty
@@ -50,38 +51,39 @@
     # WebBrowser
     firefox
     brave
-    vivaldi
-    vivaldi-widevine
-    vivaldi-ffmpeg-codecs
+    #vivaldi
+    #vivaldi-widevine
+    #vivaldi-ffmpeg-codecs
 
     # KDE plasma
-    #latte-dock
+    latte-dock
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ark
     libsForQt5.kcalc
     libsForQt5.filelight
     libsForQt5.qt5.qttools
-    #libsForQt5.akonadi
+    libsForQt5.akonadi
     libsForQt5.okular
     libsForQt5.gwenview
     libsForQt5.karchive
-    #libsForQt5.krunner
+    libsForQt5.krunner
     #libsForQt5.kcolorpicker
     libsForQt5.kcolorchooser
     #libsForQt5.kwallet
     #libsForQt5.kwallet-pam
     libsForQt5.dolphin
     libsForQt5.breeze-qt5
+    libsForQt5.bismuth
 
     # i3
-    rofi
-    polybarFull
-    i3lock
+    #rofi
+    #polybarFull
+    #i3lock
     picom
     feh
     pavucontrol
-    ncpamixer
-    dunst
+    #ncpamixer
+    #dunst
     lxappearance
     blueman
     networkmanagerapplet
@@ -123,9 +125,9 @@
     arp-scan
     openssl
     nmap
-    kubescape
+    #kubescape
     age
-    sops
+    #sops
 
     # Editor 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -138,25 +140,25 @@
     delta
     go
     nodejs-16_x
-    yarn
-    python3
-    gcc
+    #yarn
+    #python3
+    #gcc
     docker
     podman
     buildah
-    skopeo
+    #skopeo
     gitkraken
     dbeaver
-    android-tools
-    #dart
+    #android-tools # Just for some android installation --> use nix-shell
+    direnv
 
     # Server
     kubectl
-    kubernetes-helm
+    #kubernetes-helm
     lens
     rpi-imager
     #etcher
-    ansible
+    #ansible
     #xrdp
 
     # Gaming
@@ -188,6 +190,8 @@
     # System
     hardinfo
     lm_sensors
+    btrfs-progs
+    btrfs-heatmap
 
     # Blockchain
     ethminer
