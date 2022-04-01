@@ -4,9 +4,13 @@
 
 starship init fish | source
 
-####################
-## Welcome scripts ##
-####################
+######################
+## AUTOTSTART STUFF ##
+######################
+
+direnv hook fish | source
+
+echo External IP: (curl -s https://cloudflare.com/cdn-cgi/trace | grep ip | sed -s 's|ip=||g')
 
 #welcome.py
 
