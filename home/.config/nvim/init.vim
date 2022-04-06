@@ -4,7 +4,7 @@
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 Plug 'MTDL9/vim-log-highlighting'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -18,7 +18,7 @@ Plug 'vimsence/vimsence'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'airblade/vim-gitgutter'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'LnL7/vim-nix'
 Plug 'wakatime/vim-wakatime'
 Plug 'mattn/emmet-vim'
@@ -48,7 +48,9 @@ set mouse=a
 
 set nobackup
 
-set omnifunc=ale#completion#OmniFunc
+set updatetime=100
+
+"set omnifunc=ale#completion#OmniFunc
 
 """""""""""""""
 "" Shortcuts ""
@@ -70,36 +72,33 @@ nmap <C-c> :TagbarToggle<CR>
 nmap <C-x> :bdelete .
 cmap w!! w !sudo tee > /dev/null %
 
-" coc-explorer
-nmap <C-f> :CocCommand explorer<CR>
+"nnoremap <C-d> :ALEHover<CR>
 
-" coc.nvim
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+" Coc
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use K to show documentation in preview window.
+nnoremap <silent> <C-d> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
-inoremap <silent><expr> <C-space>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Nerdtree
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-f> :NERDTreeToggle<CR>
 nnoremap <C-t> :NERDTreeFind<CR>
-
-" CocExplorer
-" Use preset argument to open it
-nmap <space>ed :CocCommand explorer --preset .vim<CR>
-nmap <space>ef :CocCommand explorer --preset floating<CR>
-
-" List all presets
-nmap <space>el :CocList explPresets
 
 """"""""""""""""""""""
 "" Plugins settings ""
@@ -116,8 +115,6 @@ let g:airline_powerline_fonts = 1
 
 set listchars=eol:$,tab:>·,trail:~,space:␣
 set list
-
-nmap <C-s> :w <CR>
 
 " coc.nvim
 let g:coc_explorer_global_presets = {
@@ -158,8 +155,11 @@ let g:coc_explorer_global_presets = {
 let g:user_emmet_leader_key=','
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }, 'sources', { '_': ['ale', 'foobar'], })
+
+" Ale
+let g:ale_disable_lsp = 1
 
 """"""""""""
 "" Themes ""

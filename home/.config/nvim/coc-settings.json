@@ -1,0 +1,12 @@
+{
+  "languageserver": {
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": [
+        "nix"
+      ]
+    }
+  },
+  "diagnostic.displayByAle": false,
+  "coc.preferences.extensionUpdateCheck": "daily"
+}
