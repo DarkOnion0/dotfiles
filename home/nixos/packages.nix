@@ -38,6 +38,7 @@
     tree
     viddy
     p7zip
+    ripgrep
 
     # Terminal app
     alacritty
