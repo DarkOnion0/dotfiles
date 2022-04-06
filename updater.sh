@@ -10,6 +10,7 @@ cp ~/.config/starship.toml ~/Programmation/git/dotfiles/home/.config/
 cp ~/.config/alacritty/alacritty.yml ~/Programmation/git/dotfiles/home/.config/alacritty/
 cp ~/.tmux.conf ~/Programmation/git/dotfiles/home/
 cp ~/.gitconfig ~/Programmation/git/dotfiles/home/
+cp ~/.config/nvim/init.vim ~/Programmation/git/dotfiles/home/.config/nvim/init.vim
 sudo cp -r /etc/nixos/* ~/Programmation/git/dotfiles/home/nixos/
 
 git status
