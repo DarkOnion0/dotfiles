@@ -11,6 +11,7 @@ cp ~/.config/alacritty/alacritty.yml ~/Programmation/git/dotfiles/home/.config/a
 cp ~/.tmux.conf ~/Programmation/git/dotfiles/home/
 cp ~/.gitconfig ~/Programmation/git/dotfiles/home/
 cp ~/.config/nvim/init.vim ~/Programmation/git/dotfiles/home/.config/nvim/init.vim
+cp ~/.config/nvim/coc-settings.json ~/Programmation/git/dotfiles/home/.config/nvim/coc-settings.json
 sudo cp -r /etc/nixos/* ~/Programmation/git/dotfiles/home/nixos/
 
 git status
