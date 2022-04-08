@@ -143,7 +143,7 @@
     nodejs-16_x
     #yarn
     #python3
-    #gcc
+    gcc
     docker
     podman
     buildah
@@ -152,6 +152,7 @@
     dbeaver
     #android-tools # Just for some android installation --> use nix-shell
     direnv
+    universal-ctags
 
     # Server
     kubectl
