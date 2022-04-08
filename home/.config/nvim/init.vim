@@ -2,29 +2,56 @@
 "" Plugins List """
 """"""""""""""""""
 call plug#begin('~/.vim/plugged')
-" Make sure you use single quotes
-Plug 'MTDL9/vim-log-highlighting'
+" IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale'
+
+Plug 'vimsence/vimsence'
+"Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'preservim/tagbar'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-emoji'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'preservim/tagbar'
-Plug 'yuezk/vim-js'
-Plug 'vimsence/vimsence'
-Plug 'joshdick/onedark.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'airblade/vim-gitgutter'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'LnL7/vim-nix'
-Plug 'wakatime/vim-wakatime'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" WEB
 Plug 'mattn/emmet-vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'dense-analysis/ale'
-Plug 'preservim/nerdtree'
+Plug 'yuezk/vim-js'
+
+" Log
+Plug 'MTDL9/vim-log-highlighting'
+
+" Markdown
+Plug 'junegunn/vim-emoji'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Nix
+Plug 'LnL7/vim-nix'
+
+" Editor
+"Plug 'preservim/nerdtree'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'sheerun/vim-polyglot'
+Plug 'wakatime/vim-wakatime'
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Themes
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 """""""""""""""""""""
@@ -57,18 +84,9 @@ set updatetime=100
 """""""""""""""
 
 " Generic
-nnoremap <C-K> :call HighlightNearCursor()<CR>
-function HighlightNearCursor()
-  if !exists("s:highlightcursor")
-    match Todo /\k*\%"\k*/
-    let s:highlightcursor=1
-  else
-    match None
-    unlet s:highlightcursor
-  endif
-endfunction
+map <esc> :noh <CR>
 
-nmap <C-c> :TagbarToggle<CR>
+nnoremap <C-c> :TagbarToggle<CR>
 nmap <C-x> :bdelete .
 cmap w!! w !sudo tee > /dev/null %
 
@@ -89,16 +107,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)<cr>
+nmap <silent> gy <Plug>(coc-type-definition)<cr>
+nmap <silent> gi <Plug>(coc-implementation)<cr>
+nmap <silent> gr <Plug>(coc-references)<cr>
 
-" Nerdtree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-f> :NERDTreeToggle<CR>
-nnoremap <C-t> :NERDTreeFind<CR>
+" Coc-explorer
+nnoremap <C-f> :CocCommand explorer<CR>
 
 """"""""""""""""""""""
 "" Plugins settings ""
@@ -116,7 +131,7 @@ let g:airline_powerline_fonts = 1
 set listchars=eol:$,tab:>·,trail:~,space:␣
 set list
 
-" coc.nvim
+" coc explorer
 let g:coc_explorer_global_presets = {
 \   '.vim': {
 \     'root-uri': '~/.vim',
@@ -151,18 +166,39 @@ let g:coc_explorer_global_presets = {
 \   }
 \ }
 
+" Coc 
+let g:coc_global_extensions = [ 'coc-browser', 'coc-docker', 'coc-json', 'coc-sh', 'coc-fish', 'coc-yaml', 'coc-emmet', 'coc-html', 'coc-html-css-support', 'coc-highlight', 'coc-marketplace', 'coc-prettier', 'coc-snippets', 'coc-go', 'coc-css', 'coc-explorer', 'coc-git', 'coc-tsserver']
+
+" Coc-git
+let b:coc_git_blame = 1
+
 " Emmet
 let g:user_emmet_leader_key=','
 
 " Deoplete
 let g:deoplete#enable_at_startup = 0
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }, 'sources', { '_': ['ale', 'foobar'], })
+"call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }, 'sources', { '_': ['ale', 'foobar'], })
 
 " Ale
+let g:ale_fix_on_save = 1
 let g:ale_disable_lsp = 1
+let b:ale_fixers = {
+\   'go': ['gofmt'],
+\}
+
+" vim-go
+let g:go_highlight_operators = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_fields = 1
+
+let g:go_gopls_enabled = 1
+let g:go_gopls_options=['-remote=auto']
 
 """"""""""""
 "" Themes ""
 """"""""""""
-let g:onedark_termcolors = 16
-colorscheme dracula
+let g:onedark_termcolors = 24
+let g:onedark_terminal_italics = 1
+colorscheme onedark

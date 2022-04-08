@@ -1,4 +1,5 @@
 {
+  // LSP
   "languageserver": {
     "nix": {
       "command": "rnix-lsp",
@@ -7,6 +8,17 @@
       ]
     }
   },
+
+  // ALE config
   "diagnostic.displayByAle": false,
-  "coc.preferences.extensionUpdateCheck": "daily"
+
+  // Coc internal settings
+  "coc.preferences.extensionUpdateCheck": "daily",
+
+  // Coc-explorer
+  "explorer.icon.enableNerdfont": true,
+
+  // Coc-git
+  "git.enableGutters": true,
+  "git.addGBlameToVirtualText": true
 }
