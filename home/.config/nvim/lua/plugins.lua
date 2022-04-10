@@ -27,12 +27,23 @@ return require('packer').startup(function()
   
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
+  use { 'Shougo/deoplete.nvim' }
+
 
   -- editor
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use 'sheerun/vim-polyglot'
   use 'wakatime/vim-wakatime'
+--  use {
+--  "nvim-neo-tree/neo-tree.nvim",
+--    branch = "v2.x",
+--    requires = { 
+--      "nvim-lua/plenary.nvim",
+--      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+--      "MunifTanjim/nui.nvim" 
+--    },
+--  }
   
   -- status bar
   use 'vim-airline/vim-airline'

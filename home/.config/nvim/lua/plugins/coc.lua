@@ -16,5 +16,6 @@ vim.g.coc_global_extensions = {
     "coc-css", 
     "coc-explorer", 
     "coc-git", 
-    "coc-tsserver"
+    "coc-tsserver",
+    "coc-marketplace"
 }
