@@ -8,6 +8,28 @@
       ]
     }
   },
+  "suggest.completionItemKindLabels": {
+    "text": "",
+    "method": "ƒ",
+    "function": "ﬦ",
+    "constructor": "",
+    "variable": "",
+    "class":"",
+    "interface": "ﰮ",
+    "module": "",
+    "property": "",
+    "unit": "",
+    "value": "",
+    "enum": "了",
+    "keyword": "",
+    "snippet": "﬌",
+    "color": "",
+    "file": "",
+    "folder": "",
+    //"enummember" : "",
+    "constant": "",
+    "struct": ""
+  },
 
   // ALE config
   "diagnostic.displayByAle": false,
@@ -29,4 +51,5 @@
   "list.insertMappings": {
     "<C-c>": "do:exit"
   }
+
 }

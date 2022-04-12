@@ -28,7 +28,8 @@ return require('packer').startup(function()
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { 'Shougo/deoplete.nvim' }
-
+  
+  use { 'editorconfig/editorconfig-vim' }
 
   -- editor
   use 'SirVer/ultisnips'
