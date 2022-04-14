@@ -38,15 +38,14 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"			# Custom manpager
 
 # alias e='vscodium '										# VSCodium name in ArchLinux
 alias e='codium '											# VSCodium name in Ubuntu
-alias l='exa -la '											# set an alias for the l key
-alias c='bat '
-
-#alias cat='bat '
-
-alias vim='nvim '											# Replace vim by neovim
+alias e='nvim '											    # Replace e by neovim to bind it like the vim command to open files
 alias vi='nvim '											# Replace vi by neovim
+alias j='just '											    # Replace the long just command by a shorther one
+alias python='python3 '                                     # Alias python for some distro
+
+alias c='bat '
 alias ls='exa '												# Replace ls by exa
-alias python='python3 '
+alias l='exa -la '											# set an alias for the l key
 
 alias k="kubectl "											# Alias for kuebctl
 alias h="helm "												# Alias for helm
