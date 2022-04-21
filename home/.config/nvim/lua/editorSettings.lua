@@ -22,3 +22,7 @@ vim.opt.backup = false
 vim.opt.timeout = false
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 100
+
+vim.opt.hidden = true
+
+vim.opt.autoread = true

@@ -39,6 +39,7 @@
 
   // Coc-explorer
   "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
 
   // Coc-git
   "git.enableGutters": true,
