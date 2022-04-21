@@ -168,13 +168,13 @@
     #multimc
     corectrl
     lutris
-    gnome.zenity
     wine-staging
     amdvlk
-    xterm
-    xdelta
     minetest
     #mindustry
+    gnome.zenity
+    xterm
+    xdelta
 
     # Multimedia 
     spotify
