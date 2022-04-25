@@ -16,7 +16,7 @@ return require('packer').startup(function()
   use 'dense-analysis/ale'
 
   use 'vimsence/vimsence'
-  use 'airblade/vim-gitgutter'
+  --use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
 
   use 'preservim/tagbar'
@@ -25,7 +25,12 @@ return require('packer').startup(function()
   use { 'junegunn/fzf', run = vim.fn["fzf#install()"] }
   use 'junegunn/fzf.vim'
   
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 
+    'nvim-treesitter/nvim-treesitter', 
+    run = ':TSUpdate' 
+  }
+
+  use { 'wellle/context.vim' }
 
   --use { 'Shougo/deoplete.nvim' }
   
@@ -35,7 +40,16 @@ return require('packer').startup(function()
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use 'sheerun/vim-polyglot'
+  
+  use { 'mhinz/vim-startify' }
+  
   use 'wakatime/vim-wakatime'
+  
+  use { 'mbbill/undotree' }
+  
+  use { 'junegunn/rainbow_parentheses.vim' }
+
+--  use { 'Yggdroot/indentLine' }
 --  use {
 --  "nvim-neo-tree/neo-tree.nvim",
 --    branch = "v2.x",
@@ -55,6 +69,7 @@ return require('packer').startup(function()
   use 'morhetz/gruvbox'
   use 'arcticicestudio/nord-vim'
   use {'dracula/vim', as = 'dracula'}
+  use { 'ryanoasis/vim-devicons' }
 
   -- javascript / typescript
   use { 'yuezk/vim-js', ft = "javascript" }
@@ -73,6 +88,7 @@ return require('packer').startup(function()
     cmd = 'MarkdownPreview',
     ft = "markdown"
   }
+  use { 'dkarter/bullets.vim', ft = "markdown"}
 
   -- go
   use { 'fatih/vim-go', ft = "go" }
