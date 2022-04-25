@@ -5,7 +5,7 @@
   ## List packages installed in system profile. To search, run: ##
   ## $ nix search wget                                          ##
   ################################################################
-
+  
   # Enable automatic garbage collector
   nix.gc.automatic = true;
   nix.gc.dates = "weekly";
@@ -15,7 +15,7 @@
 
   # Package list
 
-  programs.seahorse.enable = false;
+  programs.seahorse.enable = true;
 
   environment.systemPackages = with pkgs; [
     # Shell and prompt
@@ -23,6 +23,7 @@
     zsh
     starship
     powerline
+    fzf
 
     # CLI
     curl
@@ -74,20 +75,22 @@
     #libsForQt5.kwallet-pam
     libsForQt5.dolphin
     libsForQt5.breeze-qt5
-    libsForQt5.bismuth
+    #libsForQt5.bismuth
 
     # i3
-    #rofi
-    #polybarFull
-    #i3lock
+    i3-gaps
+    rofi
+    polybarFull
+    i3lock
     picom
     feh
     pavucontrol
     #ncpamixer
-    #dunst
+    dunst
     lxappearance
     blueman
     networkmanagerapplet
+    #ulauncher
 
     # Gnome
     #gnome.gnome-tweaks

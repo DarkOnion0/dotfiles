@@ -26,7 +26,7 @@
   #qt5.enable = true;
   #qt5.platformTheme = "gtk2";
   #qt5.style = "gtk2";
-  #programs.qt5ct.enable = true;
+  programs.qt5ct.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "fr";
@@ -35,20 +35,20 @@
   # DE / WM settings
   services.xserver = {
     desktopManager = {
-      #xterm.enable = false; # I3
-      plasma5.enable = true; # Plasma
+      xterm.enable = true; # I3
+      plasma5.enable = false; # Plasma
       gnome.enable = false;
     };
    
     displayManager = {
     	sddm.enable = true; # Plasma
-        #defaultSession = "none+i3"; # I3
+        defaultSession = "none+i3"; # I3
 	gdm.enable = false;
     };
 
     # I3
     windowManager.i3 = {
-      enable = false;
+      enable = true;
       package = pkgs.i3-gaps;
     };
   };
