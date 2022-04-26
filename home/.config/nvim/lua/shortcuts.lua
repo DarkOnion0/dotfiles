@@ -6,9 +6,9 @@ map("n", "<esc>", ":noh<CR>")
 map("n", "<C-c>", ":TagbarToggle<CR>")
 vim.cmd([[
     if has('nvim')
-      inoremap <silent><expr> <c-space> coc#refresh()
+        inoremap <silent><expr> <c-space> coc#refresh()
     else
-      inoremap <silent><expr> <c-@> coc#refresh()
+        inoremap <silent><expr> <c-@> coc#refresh()
     endif
 ]])
 --map("i", "<c-space>", ":call coc#refresh()<CR>")
@@ -18,5 +18,10 @@ map("n", "gd", "<Plug>(coc-definition)<cr>")
 map("n", "gy", "<Plug>(coc-type-definition)<cr>")
 map("n", "gi", "<Plug>(coc-implementation)<cr>")
 map("n", "gr", "<Plug>(coc-references)<cr>")
+
 map("n", "<F2>", ":UndotreeToggle<CR>")
+
 map("n", "<C-b>", ":Files<CR>")
+
+map("i", "<Tab>", "<C-t>")
+map("i", "<S-Tab>", "<C-d>")
