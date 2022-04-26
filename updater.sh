@@ -3,7 +3,7 @@
 git status
 
 # VM
-cp ~/.config/i3/config ~/Programmation/git/dotfiles/home/.config/i3/
+cp -r ~/.config/i3/* ~/Programmation/git/dotfiles/home/.config/i3/
 #cp ~/.config/rofi/* ~/Programmation/git/dotfiles/.config/rofi/
 #cp ~/.config/polybar/* ~/Programmation/git/dotfiles/.config/polybar/
 
