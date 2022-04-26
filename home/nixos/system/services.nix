@@ -7,12 +7,6 @@
   # Fish config
   programs.fish.enable = true;
 
-  # Enable Kwallet
-  #security.pam.services.kwallet = {
-  #  name = "kwallet";
-  #  enableKwallet = true;
-  #};
-
   # Enable some virtualisation software (Podman, docker...)
   virtualisation = {
     podman = {
@@ -75,4 +69,7 @@
 
   # Enable gnome keyring
   services.gnome.gnome-keyring.enable = true;
+
+  # Enable blueman
+  services.blueman.enable = true;
 }

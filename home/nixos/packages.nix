@@ -82,15 +82,21 @@
     rofi
     polybarFull
     i3lock
+    xss-lock
     picom
     feh
     pavucontrol
     #ncpamixer
     dunst
     lxappearance
-    blueman
-    networkmanagerapplet
     #ulauncher
+
+    # Network
+    networkmanagerapplet
+    blueman
+    bluez
+    bluez-alsa
+    bluez-tools
 
     # Gnome
     #gnome.gnome-tweaks
