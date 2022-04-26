@@ -11,10 +11,6 @@ font pango:monospace 10
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -164,19 +160,19 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show window -icon-theme "Papirus
 bindsym $mod+p exec flameshot gui
 
 # Lock the screen
-bindsym $mod+l exec i3lock
+bindsym $mod+l exec bash ~/.config/i3/bin/lock.bash
 
 ######################
 ## CUSTOM AUTOSTART ##
 ######################
-exec_always --no-startup-id feh --recursive --bg-fill --randomize ~/.wallpapers					# launch random background
-exec_always --no-startup-id picom -b															# launch the compositor
-exec_always --no-startup-id $HOME/Programmation/git/dotfiles/home/.config/polybar/launch.sh		# launch polybar
-exec_always --no-startip-id nm-applet															# launch a little applet to manage internet conenction
-exec --no-startup-id corectrl																	# launch corectrl for managing my GPU
-exec --no-startip-id flameshot																	# launch my screen capture application
-exec --no-startip-id keepassxc																	# launch my password manager
-exec --no-startip-id ferdi																		# launch ferdi to manage all my webservice apps like protonmail or notion
+exec_always --no-startup-id nix-shell -p file imagemagick --command "bash ~/.config/i3/bin/wallpaper.bash"	    # launch random background
+exec_always --no-startup-id picom -b															                # launch the compositor
+exec_always --no-startup-id $HOME/Programmation/git/dotfiles/home/.config/polybar/launch.sh		                # launch polybar
+exec_always --no-startip-id nm-applet															                # launch a little applet to manage internet conenction
+exec --no-startup-id corectrl																	                # launch corectrl for managing my GPU
+exec --no-startip-id flameshot																	                # launch my screen capture application
+exec --no-startip-id keepassxc																	                # launch my password manager
+exec --no-startip-id ferdi																		                # launch ferdi to manage all my webservice apps like protonmail or notion
 
 ######################
 ## CUSTOM APPARENCE ##
