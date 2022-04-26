@@ -10,30 +10,60 @@ You can use the [`go cli`](./installer) to use my dotfiles but it's always in he
 
 ```text
 .
-├── build.sh                            # the build script for the cli
-├── dockerfile                          # the docker test images (DEPRECATED)
-├── dotfiles.yaml                       # my dotfiles config file
+├── build.sh
+├── dockerfile
+├── dotfiles.yaml
+├── .gitignore
 ├── go.mod
 ├── go.sum
-├── home                                # the directory where all my dotfiles lives
-│   ├── .config                         # my nix config files
-│   │   ├── alacritty
+├── home                                            # The directory where all my dotfiles lives
+│   ├── .config
+│   │   ├── alacritty                               # My terminal config
 │   │   │   └── alacritty.yml
-│   │   ├── fish
+│   │   ├── fish                                    # My shell config
+│   │   │   ├── conf.d
+│   │   │   │   └── config.fish
 │   │   │   └── config.fish
-│   │   ├── i3
+│   │   ├── i3                                      # My minimal VM config
+│   │   │   ├── bin
+│   │   │   │   ├── lock.bash
+│   │   │   │   └── wallpaper.bash
 │   │   │   └── config
-│   │   ├── nvim
-│   │   │   └── init.vim
-│   │   ├── polybar
+│   │   ├── nixpkgs                                 # My home-manager config
+│   │   │   └── home.nix
+│   │   ├── nvim                                    # My text editor (neovim) config
+│   │   │   ├── coc-settings.json
+│   │   │   ├── init.lua
+│   │   │   ├── init.vim
+│   │   │   └── lua
+│   │   │       ├── editorSettings.lua
+│   │   │       ├── functions.lua
+│   │   │       ├── plugins
+│   │   │       │   ├── airline.lua
+│   │   │       │   ├── ale.lua
+│   │   │       │   ├── coc-explorer.lua
+│   │   │       │   ├── coc-git.lua
+│   │   │       │   ├── coc.lua
+│   │   │       │   ├── context.lua
+│   │   │       │   ├── deoplete.lua
+│   │   │       │   ├── editorconfig.lua
+│   │   │       │   ├── emmet.lua
+│   │   │       │   ├── rainbow_parentheses.lua
+│   │   │       │   ├── undotree.lua
+│   │   │       │   ├── vim-go.lua
+│   │   │       │   └── vimsence.lua
+│   │   │       ├── plugins.lua
+│   │   │       ├── shortcuts.lua
+│   │   │       └── theme.lua
+│   │   ├── polybar                                 # My bar config
 │   │   │   ├── config
 │   │   │   └── launch.sh
-│   │   ├── rofi
+│   │   ├── rofi                                    # My launcher config
 │   │   │   └── config.rasi
 │   │   └── starship.toml
-│   ├── nixos                           # my nixos config files
+│   ├── .gitconfig
+│   ├── nixos                                       # My OS config
 │   │   ├── configuration.nix
-│   │   ├── configuration.nix.backup
 │   │   ├── hardware-configuration.nix
 │   │   ├── network
 │   │   │   ├── bluetooth.nix
@@ -46,15 +76,16 @@ You can use the [`go cli`](./installer) to use my dotfiles but it's always in he
 │   │   │   ├── services.nix
 │   │   │   └── x11.nix
 │   │   └── user.nix
-│   └── .tmux.conf
-├── installer                           # the cli directory
+│   └── .tmux.conf                                  # My minimal tmux config
+├── installer                                       # My dotfiles installer code (deprecated ?!)
 │   ├── cmd
 │   │   ├── install.go
 │   │   ├── root.go
 │   │   └── upload.go
 │   └── main.go
 ├── LICENSE
-├── package.yaml                        # my cli packages list
-├── README.md                           # this file :)
-└── updater.sh                          # the update script (DEPRECATED)
+├── package.yaml
+├── README.md
+├── test.txt
+└── updater.sh                                      # My minimal dotfiles sync script
 ```
