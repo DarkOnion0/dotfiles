@@ -1,5 +1,5 @@
 env
 dockerfile
+binary
 test*
-bin
 arbo.txt
