@@ -49,6 +49,8 @@ return require('packer').startup(function()
   
   use { 'junegunn/rainbow_parentheses.vim' }
 
+  use { 'psliwka/vim-smoothie' }
+
 --  use { 'Yggdroot/indentLine' }
 --  use {
 --  "nvim-neo-tree/neo-tree.nvim",
