@@ -72,4 +72,7 @@
 
   # Enable blueman
   services.blueman.enable = true;
+
+  # Enable clipboard history with VM
+  services.greenclip.enable = true;
 }
