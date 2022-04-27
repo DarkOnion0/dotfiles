@@ -4,7 +4,8 @@ git status
 
 # VM
 cp -r ~/.config/i3/* ~/Programmation/git/dotfiles/home/.config/i3/
-#cp ~/.config/rofi/* ~/Programmation/git/dotfiles/.config/rofi/
+cp -r ~/.config/rofi/* ~/Programmation/git/dotfiles/home/.config/rofi/
+cp -r ~/.config/greenclip.toml ~/Programmation/git/dotfiles/home/.config/
 #cp ~/.config/polybar/* ~/Programmation/git/dotfiles/.config/polybar/
 
 # SHELL
