@@ -1,8 +1,0 @@
-configuration {
- modi: "window,drun,ssh,combi";
- theme: "fancy.rasi";
- font: "hack 10";
- combi-modi: "window,drun,ssh";
- }
-
-@import "/usr/share/rofi/themes/fancy.rasi"
