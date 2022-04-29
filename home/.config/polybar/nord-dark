@@ -1,0 +1,31 @@
+; vim:ft=dosini
+
+[colors]
+; nord 0
+background = #2E3440
+; nord 1
+nord1 = #3B4252
+; nord 2
+nord2 = #434C5E
+; nord 3
+buffer = #4c566a
+; nord 4
+foreground = #D8DEE9
+; nord 7
+nord7 = #8FBCBB
+; nord 8
+nord8 = #88C0D0
+; nord 9
+nord9 = #81A1C1
+; nord 10
+nord10 = #5E81AC
+; nord 11
+urgent = #BF616A
+; nord nord 12
+warning = #D08770
+; bord 13
+notify = #EBCB8B
+; nord 14
+success = #A3BE8C
+; nord 15
+function = #B48EAD

@@ -1,0 +1,2 @@
+Some of the parts of my polybar config are not my own :
+- https://github.com/Yucklys/polybar-nord-theme > the nord color theme
