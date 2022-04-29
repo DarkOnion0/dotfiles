@@ -1,6 +1,7 @@
 [user]
 	name = DarkOnion0
 	email = Darkgenius1@protonmail.com
+	signingkey = 852A39E50BA9083B
 
 [core]
 	editorgit = vim
@@ -19,9 +20,15 @@
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	line-numbers = true
+
 [pull]
 	rebase = false
+
 [init]
 	defaultBranch = main
+
 [url "https://github.com/"]
 	insteadOf = git://github.com/
+
+[commit]
+	gpgsign = true
