@@ -16,6 +16,11 @@
   # Package list
 
   programs.seahorse.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryFlavor = "curses";
+  };
 
   environment.systemPackages = with pkgs; [
     # Shell and prompt
@@ -75,6 +80,7 @@
     #libsForQt5.kwallet-pam
     libsForQt5.dolphin
     libsForQt5.breeze-qt5
+    libsForQt5.qtstyleplugins
     #libsForQt5.bismuth
 
     # i3
@@ -137,6 +143,9 @@
     nmap
     #kubescape
     age
+    gnupg
+    pinentry-curses
+    pinentry
     #sops
 
     # Editor 
@@ -206,5 +215,9 @@
 
     # Blockchain
     ethminer
+
+    # Fonts
+    font-awesome
+    nerdfonts
   ];
 }
