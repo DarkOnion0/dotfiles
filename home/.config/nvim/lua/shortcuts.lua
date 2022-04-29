@@ -21,7 +21,8 @@ map("n", "gr", "<Plug>(coc-references)<cr>")
 
 map("n", "<F2>", ":UndotreeToggle<CR>")
 
-map("n", "<C-b>", ":Files<CR>")
+map("n", "<C-s>", ":Files<CR>")
+map("n", "<C-b>", ":Buffers<CR>")
 
 map("i", "<Tab>", "<C-t>")
 map("i", "<S-Tab>", "<C-d>")
