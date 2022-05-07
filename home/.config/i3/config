@@ -170,10 +170,11 @@ exec_always picom -b															                # launch the compositor
 exec_always $HOME/Programmation/git/dotfiles/home/.config/polybar/launch.sh		                # launch polybar
 exec_always nm-applet															                # launch a little applet to manage internet conenction
 exec_always flameshot                                                                           # launch my screen capture application
+exec_always --no-startup-id greenclip daemon>/dev/null
 #exec corectrl																	                # launch corectrl for managing my GPU
 exec keepassxc																	                # launch my password manager
 exec ferdi																		                # launch ferdi to manage all my webservice apps like protonmail or notion
-exec_always --no-startup-id greenclip daemon>/dev/null
+exec nextcloud
 
 ######################
 ## CUSTOM APPARENCE ##
