@@ -116,7 +116,7 @@ typeset -A menu
 menu=(
   [ Shutdown]="systemctl poweroff"
   [ Reboot]="systemctl reboot"
-  [ Suspend]="systemctl suspend"
+  [ Suspend]="bash ~/.config/i3/bin/lock.bash & systemctl suspend"
   [ Lock]="bash ~/.config/i3/bin/lock.bash"
   [ Logout]="i3-msg exit"
   [ Cancel]=""
