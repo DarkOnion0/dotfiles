@@ -30,6 +30,7 @@
     "constant": "",
     "struct": ""
   },
+  "html.suggest.html5": true,
 
   // ALE config
   "diagnostic.displayByAle": false,
