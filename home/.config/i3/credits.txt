@@ -1,3 +1,4 @@
 Some of the parts of my i3 config are not my own :
 - https://github.com/endeavouros-team/endeavouros-i3wm-setup > some of the scripts & shortcuts
+- https://github.com/dracula/i3 > dracula theme
 - https://github.com/BlackArcheruz/i3wm-nordic-dark > nord theme
