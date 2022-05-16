@@ -134,6 +134,9 @@
     element-desktop
     discord
     #electron-mail
+    thunderbird
+    birdtray
+    protonmail-bridge
 
     # Security
     keepassxc
