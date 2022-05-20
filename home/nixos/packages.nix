@@ -186,7 +186,7 @@
 
     # Gaming
     steam
-    #multimc
+    multimc
     corectrl
     lutris
     wine-staging
