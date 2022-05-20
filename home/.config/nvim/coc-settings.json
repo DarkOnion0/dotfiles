@@ -55,5 +55,8 @@
   },
 
   // Prettier
-  "coc.preferences.formatOnSaveFiletypes": ["markdown", "css", "scss", "html", "json"]
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "css", "scss", "html", "json"],
+
+  // Editor Settings
+  "colors.filetypes": ["*"]
 }

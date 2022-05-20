@@ -51,6 +51,8 @@ return require('packer').startup(function()
 
   use { 'psliwka/vim-smoothie' }
 
+  use { 'IngoMeyer441/coc_current_word' }
+
 --  use { 'Yggdroot/indentLine' }
 --  use {
 --  "nvim-neo-tree/neo-tree.nvim",
