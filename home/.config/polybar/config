@@ -105,7 +105,7 @@ wrapping-scroll = false
 
 label-mode-padding = 2
 label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.notify}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
