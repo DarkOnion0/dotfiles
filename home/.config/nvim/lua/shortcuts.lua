@@ -14,10 +14,10 @@ vim.cmd([[
 --map("i", "<c-space>", ":call coc#refresh()<CR>")
 map("n", "<C-d>", ":call Show_documentation()<CR>")
 map("n", "<C-f>", ":CocCommand explorer<CR>")
-map("n", "gd", ":call CocAction('jumpDefinition')<cr>")
-map("n", "gy", ":call CocAction('jumpTypeDefinition')<cr>")
-map("n", "gi", ":CocAction('jumpImplementation')<cr>")
-map("n", "gr", ":call CocAction('jumpReferences')<cr>")
+map("n", "gd", ":call CocActionAsync('jumpDefinition')<cr>")
+map("n", "gy", ":call CocActionAsync('jumpTypeDefinition')<cr>")
+map("n", "gi", ":call CocActionAsync('jumpImplementation')<cr>")
+map("n", "gr", ":call CocActionAsync('jumpReferences')<cr>")
 
 map("n", "<F2>", ":UndotreeToggle<CR>")
 
