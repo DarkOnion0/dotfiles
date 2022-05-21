@@ -32,8 +32,6 @@ return require('packer').startup(function()
 
   use { 'wellle/context.vim' }
 
-  --use { 'Shougo/deoplete.nvim' }
-  
   use { 'editorconfig/editorconfig-vim' }
 
   -- editor
