@@ -183,10 +183,11 @@
     #etcher
     #ansible
     #xrdp
+    #rustdesk
 
     # Gaming
     steam
-    multimc
+    polymc
     corectrl
     lutris
     wine-staging
@@ -203,12 +204,14 @@
     obs-studio
     libsForQt5.kdenlive
     gimp
+    inkscape
     freetube
     mpv
 
     # Virtualisation
-    waydroid
+    #waydroid
     virt-manager
+    virtiofsd
 
     # System
     hardinfo
