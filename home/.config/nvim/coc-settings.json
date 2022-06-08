@@ -58,5 +58,19 @@
   "coc.preferences.formatOnSaveFiletypes": ["markdown", "css", "scss", "html", "json"],
 
   // Editor Settings
-  "colors.filetypes": ["*"]
+  "colors.filetypes": [
+    "*"
+  ],
+  "cSpell.userWords": [
+    "ADZT",
+    "bson",
+    "buildah",
+    "bwmarrin",
+    "cloudlfare",
+    "darkcorp",
+    "kompose",
+    "kube",
+    "mongodb",
+    "podman"
+  ]
 }
