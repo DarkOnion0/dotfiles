@@ -23,7 +23,22 @@ return require('packer').startup(function()
   use 'jiangmiao/auto-pairs'
 
   use { 'junegunn/fzf', run = vim.fn["fzf#install()"] }
-  use 'junegunn/fzf.vim'
+  use { 'junegunn/fzf.vim' }
+  
+  --use {
+  --  'nvim-telescope/telescope.nvim',
+  --  requires = { 
+  --    "nvim-lua/plenary.nvim",
+  --    "BurntSushi/ripgrep",
+  --    "sharkdp/fd",
+  --    "nvim-treesitter/nvim-treesitter",
+  --    "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+  --  }
+  --}
+  --use {
+  --  'nvim-telescope/telescope-fzf-native.nvim', 
+  --  run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+  --}
   
   use { 
     'nvim-treesitter/nvim-treesitter', 
@@ -50,6 +65,16 @@ return require('packer').startup(function()
   use { 'psliwka/vim-smoothie' }
 
   use { 'IngoMeyer441/coc_current_word' }
+
+  --use {
+  --  "nvim-neo-tree/neo-tree.nvim",
+  --  branch = "v2.x",
+  --  requires = { 
+  --    "nvim-lua/plenary.nvim",
+  --    "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+  --    "MunifTanjim/nui.nvim",
+  --  }
+  --}
 
 --  use { 'Yggdroot/indentLine' }
 --  use {
