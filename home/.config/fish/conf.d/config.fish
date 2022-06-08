@@ -10,7 +10,7 @@ starship init fish | source
 
 direnv hook fish | source
 
-echo External IP: (curl -s https://cloudflare.com/cdn-cgi/trace | grep ip | sed -s 's|ip=||g')
+#echo External IP: (curl -s https://cloudflare.com/cdn-cgi/trace | grep ip | sed -s 's|ip=||g')
 
 #welcome.py
 
@@ -76,3 +76,5 @@ alias gpl="git pull "
 
 alias f="fzf "
 alias ff="fzf --preview 'bat --color "always" {}' "
+
+alias remoteIp="echo External IP: (curl -s https://cloudflare.com/cdn-cgi/trace | grep ip | sed -s 's|ip=||g')"
