@@ -4,8 +4,8 @@
 	signingkey = 852A39E50BA9083B
 
 [core]
-	editorgit = vim
-	editor = vim
+	editorgit = nvim
+	editor = nvim
 	pager = delta
 
 [interactive]
@@ -27,8 +27,8 @@
 [init]
 	defaultBranch = main
 
-[url "https://github.com/"]
-	insteadOf = git://github.com/
-
 [commit]
-	gpgsign = true
+    gpgsign = true
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
