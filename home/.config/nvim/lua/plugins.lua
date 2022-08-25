@@ -92,7 +92,8 @@ return require('packer').startup(function()
   use 'vim-airline/vim-airline-themes'
 
   -- themes
-  use 'joshdick/onedark.vim'
+  --use 'joshdick/onedark.vim'
+  use 'navarasu/onedark.nvim'
   use 'morhetz/gruvbox'
   use 'arcticicestudio/nord-vim'
   use {'dracula/vim', as = 'dracula'}
