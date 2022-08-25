@@ -18,6 +18,9 @@ map("n", "gd", ":call CocActionAsync('jumpDefinition')<cr>")
 map("n", "gy", ":call CocActionAsync('jumpTypeDefinition')<cr>")
 map("n", "gi", ":call CocActionAsync('jumpImplementation')<cr>")
 map("n", "gr", ":call CocActionAsync('jumpReferences')<cr>")
+map("n", "gf", "<Plug>(coc-dialog-menu)")
+map("n", "[g", "<Plug>(coc-diagnostic-prev)")
+map("n", "[g", "<Plug>(coc-diagnostic-next)")
 
 map("n", "<F2>", ":UndotreeToggle<CR>")
 
