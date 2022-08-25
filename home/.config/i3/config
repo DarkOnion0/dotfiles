@@ -210,10 +210,14 @@ client.urgent           #900000 #900000 #ffffff #900000
 workspace_layout tabbed
 
 for_window [class="Gnome-calculator"] floating enable
+for_window [class="kcalc"] floating enable
 for_window [class="Pavucontrol"] floating enable
+
 for_window [class="Spotify"] move container to workspace $ws10
 for_window [class="KeePassXC"] move container to workspace $ws10
+
 for_window [class="Ferdi"] move container to workspace $ws9
+for_window [class="notion-app-enhanced"] move container to workspace $ws9
 for_window [class="Discord"] move container to workspace $ws9
 
 ######################
