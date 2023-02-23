@@ -10,9 +10,11 @@ cp -r ~/.config/greenclip.toml ~/Programmation/git/dotfiles/home/.config/
 
 # SHELL
 cp ~/.config/fish/config.fish ~/Programmation/git/dotfiles/home/.config/fish/
+cp -r ~/.config/fish/functions/ ~/Programmation/git/dotfiles/home/.config/fish/
 cp ~/.config/fish/conf.d/config.fish ~/Programmation/git/dotfiles/home/.config/fish/conf.d/config.fish
 cp ~/.config/starship.toml ~/Programmation/git/dotfiles/home/.config/
 cp ~/.config/alacritty/alacritty.yml ~/Programmation/git/dotfiles/home/.config/alacritty/
+cp -r ~/.config/kitty/ ~/Programmation/git/dotfiles/home/.config/
 cp ~/.tmux.conf ~/Programmation/git/dotfiles/home/
 
 # GIT
