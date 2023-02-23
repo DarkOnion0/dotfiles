@@ -1,4 +1,9 @@
-{pkgs, config, lib, ...}: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   gtk = {
     enable = true;
     cursorTheme = {
@@ -23,5 +28,4 @@
       name = "Nordic";
     };
   };
-
 }

@@ -1,8 +1,11 @@
-{ config, writeTextFile, pkgs, ... }:
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
-  {
+{
+  config,
+  writeTextFile,
+  pkgs,
+  ...
+}: let
+  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "dark";
@@ -12,7 +15,7 @@ in
   };
 
   # Imports
-  
+
   imports = [
     ./sway
     ./nix.nix

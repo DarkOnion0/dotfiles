@@ -1,5 +1,9 @@
-{ pkgs, config, lib, ... }: {
-
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./misc.nix
   ];
@@ -10,7 +14,7 @@
     config = rec {
       modifier = "Mod4";
       # Use kitty as default terminal
-      terminal = "kitty"; 
+      terminal = "kitty";
       startup = [
         # Launch browser on start
         {command = "vivaldi";}
@@ -20,12 +24,12 @@
       ];
       workspaceLayout = "tabbed";
       assigns = {
-        "1" = [{ class = "Vivaldi-stable"; }];
-        "9" = [{ class = "Ferdium"; }];
+        "1" = [{class = "Vivaldi-stable";}];
+        "9" = [{class = "Ferdium";}];
         "10" = [
-          { app_id = "org.keepassxc.KeePassXC"; }
-          { app_id = "corectrl"; }
-          { class = "Spotify"; }
+          {app_id = "org.keepassxc.KeePassXC";}
+          {app_id = "corectrl";}
+          {class = "Spotify";}
         ];
       };
       keybindings = lib.mkOptionDefault {
@@ -41,7 +45,7 @@
         # Layout
         "${modifier}+m" = "splith";
         "${modifier}+x" = "splitv";
-        
+
         "${modifier}+s" = "layout stacking";
         "${modifier}+z" = "layout tabbed";
         "${modifier}+e" = "layout toggle split";

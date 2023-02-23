@@ -1,4 +1,9 @@
-{pkgs, config, lib, ...}: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   programs = {
     swaylock.settings = {
       show-failed-attempts = true;
@@ -7,7 +12,7 @@
       fade-in = 0.2;
       effect-blur = "7x5";
     };
-    
+
     mako = {
       enable = true;
       defaultTimeout = 10000;

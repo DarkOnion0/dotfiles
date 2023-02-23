@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   programs.neovim.coc = {
     enable = true;
     package = with pkgs.nodePackages; [

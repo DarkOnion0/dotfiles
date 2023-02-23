@@ -1,5 +1,9 @@
-{ pkgs, config, unstable, ... }: 
 {
+  pkgs,
+  config,
+  unstable,
+  ...
+}: {
   fonts.fontconfig.enable = true;
 
   # Let Home Manager install and manage itself.
@@ -116,7 +120,7 @@
     pinentry
     #sops
 
-    # Editor 
+    # Editor
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     unstable.neovim
     #neovim-nightly
@@ -167,7 +171,7 @@
     xterm
     xdelta
 
-    # Multimedia 
+    # Multimedia
     spotify
     vlc
     obs-studio
@@ -219,7 +223,7 @@
     noto-fonts-cjk
     noto-fonts-emoji
 
-    # Other 
+    # Other
     feh
     pavucontrol
   ];
