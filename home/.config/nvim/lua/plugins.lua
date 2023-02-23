@@ -7,16 +7,31 @@ vim.cmd([[
 ]])
 
 -- The plugins list
-return require('packer').startup(function()
+return require('packer').startup({function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   
   -- ide
   use { 'neoclide/coc.nvim', branch = "release" }
-  use 'dense-analysis/ale'
+  --use 'dense-analysis/ale'
 
   use 'vimsence/vimsence'
+
+  use {
+    "folke/noice.nvim",
+    event = "VimEnter",
+    config = function()
+      require("noice").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+      }
+  }
   --use 'airblade/vim-gitgutter'
+  use {
+    'lewis6991/gitsigns.nvim',
+  }
   use 'tpope/vim-fugitive'
 
   use 'preservim/tagbar'
@@ -25,27 +40,33 @@ return require('packer').startup(function()
   use { 'junegunn/fzf', run = vim.fn["fzf#install()"] }
   use { 'junegunn/fzf.vim' }
   
-  --use {
-  --  'nvim-telescope/telescope.nvim',
-  --  requires = { 
-  --    "nvim-lua/plenary.nvim",
-  --    "BurntSushi/ripgrep",
-  --    "sharkdp/fd",
-  --    "nvim-treesitter/nvim-treesitter",
-  --    "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-  --  }
-  --}
-  --use {
-  --  'nvim-telescope/telescope-fzf-native.nvim', 
-  --  run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
-  --}
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "BurntSushi/ripgrep",
+      "sharkdp/fd",
+      "nvim-treesitter/nvim-treesitter",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "nvim-telescope/telescope-github.nvim"
+    }
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim', 
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+  }
   
   use { 
     'nvim-treesitter/nvim-treesitter', 
     run = ':TSUpdate' 
   }
 
-  use { 'wellle/context.vim' }
+  use { 
+    'nvim-treesitter/nvim-treesitter-context',
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+  }
 
   use { 'editorconfig/editorconfig-vim' }
 
@@ -65,6 +86,10 @@ return require('packer').startup(function()
   use { 'psliwka/vim-smoothie' }
 
   use { 'IngoMeyer441/coc_current_word' }
+
+  use { "gbprod/yanky.nvim" }
+
+  use "rhysd/vim-grammarous"
 
   --use {
   --  "nvim-neo-tree/neo-tree.nvim",
@@ -88,16 +113,26 @@ return require('packer').startup(function()
 --  }
   
   -- status bar
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+  --use 'vim-airline/vim-airline'
+  --use 'vim-airline/vim-airline-themes'
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons'}
 
   -- themes
-  --use 'joshdick/onedark.vim'
-  use 'navarasu/onedark.nvim'
-  use 'morhetz/gruvbox'
-  use 'arcticicestudio/nord-vim'
-  use {'dracula/vim', as = 'dracula'}
+  --use 'navarasu/onedark.nvim'
+  --use 'rmehri01/onenord.nvim'
+  --use 'sainnhe/gruvbox-material'
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin"
+  }
+  --use 'morhetz/gruvbox'
+  --use {'dracula/vim', as = 'dracula'}
   use { 'ryanoasis/vim-devicons' }
+  --use 'shaunsingh/nord.nvim'
 
   -- javascript / typescript
   use { 'yuezk/vim-js', ft = "javascript" }
@@ -117,10 +152,19 @@ return require('packer').startup(function()
     ft = "markdown"
   }
   use { 'dkarter/bullets.vim', ft = "markdown"}
+  --use {'edluffy/hologram.nvim'}
 
   -- go
   use { 'fatih/vim-go', ft = "go" }
 
   -- nix
   use {"LnL7/vim-nix", ft = "nix"}
-end)
+
+  -- d2
+  use {"terrastruct/d2-vim", ft = "d2"}
+end,
+config = {
+  display = {
+    open_fn = require('packer.util').float,
+  }
+}})

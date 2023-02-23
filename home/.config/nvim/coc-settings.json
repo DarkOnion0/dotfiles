@@ -43,8 +43,8 @@
   "explorer.file.showHiddenFiles": true,
 
   // Coc-git
-  "git.enableGutters": true,
-  "git.addGBlameToVirtualText": true,
+  "git.enableGutters": false,
+  "git.addGBlameToVirtualText": false,
 
   // Fix Fuzzy search with coc
   "list.normalMappings": {
@@ -72,5 +72,8 @@
     "kube",
     "mongodb",
     "podman"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false,
+  "svelte.enable-ts-plugin": true,
+  "rust-analyzer.enable": true
 }

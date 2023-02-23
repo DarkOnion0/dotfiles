@@ -18,5 +18,6 @@ vim.g.coc_global_extensions = {
     "coc-git", 
     "coc-tsserver",
     "coc-marketplace",
-    "coc-spell-checker"
+    --"coc-spell-checker",
+    "coc-pyright"
 }
