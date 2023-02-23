@@ -2,8 +2,10 @@
   pkgs,
   config,
   lib,
+  modulesPath,
   ...
-}: {
+}: 
+{
   imports = [
     ./misc.nix
   ];
@@ -41,6 +43,7 @@
         "${modifier}+d" = "exec rofi -show drun -show-icons";
         "${modifier}+Shift+d" = "exec rofi -show window -show-icons";
         "${modifier}+c" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard";
+        "${modifier}+Shift+e" = "exec cat ${toString ./.}/bin/powerMenu.sh | bash";
 
         # Layout
         "${modifier}+m" = "splith";
@@ -77,7 +80,10 @@
       bars = [
         {
           mode = "dock";
-          fonts.size = 8.0;
+          fonts = {
+            size = 8.0;
+            names = ["FiraCode Nerd Font" "FontAwesome5Free"];
+          };
           command = "waybar";
           position = "top";
         }
