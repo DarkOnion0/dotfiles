@@ -5,15 +5,18 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Enable Elkowars Wacky Widgets
+  #programs.eww = {
+  #  enable = true;
+  #  package = pkgs.eww-wayland;
+  #  configDir = "${config.home.homeDirectory}/Programmation/git/dotfiles/home/.config/eww/";
+  #};
+
   home.packages = with pkgs; [
     # Sway
-    swaylock
+    swaylock-effects
     swayidle
     wl-clipboard
-    mako
-    alacritty
-    wofi
-    waybar
 
     # CLI
     curl

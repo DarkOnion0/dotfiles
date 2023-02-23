@@ -1,4 +1,9 @@
 { pkgs, config, lib, ... }: {
+
+  imports = [
+    ./misc.nix
+  ];
+
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -26,6 +31,12 @@
       keybindings = lib.mkOptionDefault {
         # Generic Commands
         "${modifier}+Shift+a" = "kill";
+
+        # Shortcut
+        "${modifier}+l" = "exec swaylock";
+        "${modifier}+d" = "exec rofi -show drun -show-icons";
+        "${modifier}+Shift+d" = "exec rofi -show window -show-icons";
+        "${modifier}+c" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard";
 
         # Layout
         "${modifier}+m" = "splith";
@@ -57,7 +68,16 @@
         "${modifier}+Shift+underscore" = "move container to workspace number 8";
         "${modifier}+Shift+ccedilla" = "move container to workspace number 9";
         "${modifier}+Shift+agrave" = "move container to workspace number 10";
-      };                    
+      };
+
+      bars = [
+        {
+          mode = "dock";
+          fonts.size = 8.0;
+          command = "waybar";
+          position = "top";
+        }
+      ];
     };
     extraConfig = ''
       input type:keyboard {

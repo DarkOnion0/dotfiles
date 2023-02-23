@@ -10,6 +10,8 @@ in
   home.keyboard = {
     layout = "fr";
   };
+
+  # Imports
   
   imports = [
     ./sway
