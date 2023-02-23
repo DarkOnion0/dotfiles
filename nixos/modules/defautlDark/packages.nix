@@ -1,26 +1,69 @@
-{ pkgs, ... }:
-
+{ config
+, pkgs
+, /*
+  pkgsUnstable,
+*/
+  ...
+}:
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in
 {
+
+  programs = {
+    seahorse.enable = true;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "curses";
+    };
+
+    steam.enable = true;
+
+    fish.enable = true;
+
+    dconf.enable = true;
+
+    qt5ct.enable = true;
+  };
+
+  services = {
+    # Enable gnome keyring
+    gnome.gnome-keyring.enable = true;
+
+    # Enable clipboard history with VM
+    greenclip.enable = true;
+
+    gvfs.enable = true;
+
+    openssh.enable = true;
+  };
+
+  security = {
+    polkit.enable = true;
+  };
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wants = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
   ################################################################
   ## List packages installed in system profile. To search, run: ##
   ## $ nix search wget                                          ##
   ################################################################
-  
-  # Enable automatic garbage collector
-  nix.gc.automatic = true;
-  nix.gc.dates = "weekly";
-
-  # Enable unfree pkgs
-  nixpkgs.config.allowUnfree = true;
-
-  # Package list
-
-  programs.seahorse.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "curses";
-  };
 
   environment.systemPackages = with pkgs; [
     # Shell and prompt
@@ -45,9 +88,12 @@
     viddy
     p7zip
     ripgrep
+    ranger
 
     # Terminal app
     alacritty
+    kitty
+    pixcat
     tmux
 
     # Backup tool
@@ -56,11 +102,11 @@
     gparted
 
     # WebBrowser
-    firefox
     brave
-    #vivaldi
-    #vivaldi-widevine
-    #vivaldi-ffmpeg-codecs
+    librewolf
+    vivaldi
+    vivaldi-widevine
+    vivaldi-ffmpeg-codecs
 
     # KDE plasma
     latte-dock
@@ -82,6 +128,7 @@
     libsForQt5.breeze-qt5
     libsForQt5.qtstyleplugins
     #libsForQt5.bismuth
+    libsForQt5.kalendar
 
     # i3
     i3-gaps
@@ -92,10 +139,8 @@
     picom
     feh
     pavucontrol
-    #ncpamixer
     dunst
     lxappearance
-    #ulauncher
 
     # Network
     networkmanagerapplet
@@ -105,10 +150,6 @@
     bluez-tools
 
     # Gnome
-    #gnome.gnome-tweaks
-    #gnomeExtensions.appindicator
-    #gnomeExtensions.dash-to-dock
-    #gnomeExtensions.floating-dock
     gnome.gnome-keyring
 
     # NixOS tools
@@ -117,14 +158,15 @@
 
     # Office
     libreoffice-still
-    #teams
+    teams
     drawio
     flameshot
     anki-bin
     nextcloud-client
 
     # Productivity
-    ferdi
+    unstable.ferdium
+    notion-app-enhanced
 
     # Printing
     cups
@@ -133,7 +175,6 @@
     # Chat
     element-desktop
     discord
-    #electron-mail
     thunderbird
     birdtray
     protonmail-bridge
@@ -144,7 +185,6 @@
     arp-scan
     openssl
     nmap
-    #kubescape
     age
     gnupg
     pinentry-curses
@@ -152,8 +192,7 @@
     #sops
 
     # Editor 
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
+    unstable.neovim
     vscodium
     jetbrains.idea-ultimate
 
@@ -161,14 +200,12 @@
     git
     delta
     go
-    nodejs-16_x
-    #yarn
-    #python3
+    nodejs-16_x # For coc.nvim
     gcc
     docker
     podman
     buildah
-    #skopeo
+    skopeo
     gitkraken
     dbeaver
     #android-tools # Just for some android installation --> use nix-shell
@@ -177,17 +214,13 @@
 
     # Server
     kubectl
-    #kubernetes-helm
     lens
     rpi-imager
-    #etcher
-    #ansible
-    #xrdp
-    #rustdesk
+
 
     # Gaming
     steam
-    polymc
+    #polymc
     corectrl
     lutris
     wine-staging
@@ -221,9 +254,20 @@
 
     # Blockchain
     ethminer
+  ]
+    /*
+      ++ (with pkgsUnstable; [
+      # productivity
+      ferdium
+      ])
+    */;
 
-    # Fonts
+
+  fonts.fonts = with pkgs; [
     font-awesome
     nerdfonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
   ];
 }

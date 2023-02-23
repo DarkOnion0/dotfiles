@@ -5,18 +5,26 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
 
   boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "coretemp" "nct6775" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [ 
+    config.boot.kernelPackages.r8168 
+  ];
 
   fileSystems."/" =
     {
       device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
+      fsType = "xfs";
+    };
+
+  fileSystems."/boot" =
+    {
+      device = "/dev/disk/by-label/BOOT";
+      fsType = "vfat";
     };
 
   swapDevices = [ ];
