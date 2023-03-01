@@ -18,15 +18,30 @@
       # Use kitty as default terminal
       terminal = "kitty";
       startup = [
-        # Launch browser on start
+        # Workspace 1
         {command = "vivaldi";}
-        {command = "corectrl";}
+
+        # Workspace 2
+        {command = "kitty";}
+
+        # Workspace 3
+        {command = "obsidian";}
+
+        # Workspace 9
         {command = "ferdium";}
+
+        # Workspace 10
         {command = "keepassxc";}
+        {command = "corectrl";}
       ];
       workspaceLayout = "tabbed";
       assigns = {
         "1" = [{class = "Vivaldi-stable";}];
+        "2" = [
+          {app_id = "kitty";}
+          {app_id = "Alacritty";}
+        ];
+        "3" = [{class = "obsidian";}];
         "9" = [{class = "Ferdium";}];
         "10" = [
           {app_id = "org.keepassxc.KeePassXC";}
@@ -41,6 +56,7 @@
         # Shortcut
         "${modifier}+l" = "exec swaylock";
         "${modifier}+d" = "exec rofi -show drun -show-icons";
+        "${modifier}+p" = "exec flameshot gui";
         "${modifier}+Shift+d" = "exec rofi -show window -show-icons";
         "${modifier}+c" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard";
         "${modifier}+Shift+e" = "exec cat ${toString ./.}/bin/powerMenu.sh | bash";
