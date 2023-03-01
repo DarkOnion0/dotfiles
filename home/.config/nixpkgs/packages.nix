@@ -52,8 +52,7 @@
     fzf
 
     # Terminal app
-    alacritty
-    kitty
+    #kitty
     pixcat
     tmux
 
@@ -91,7 +90,7 @@
     unstable.ferdium
     #notion-app-enhanced
     unstable.appflowy
-    obsidian
+    unstable.obsidian
     zotero
 
     # Printing
@@ -163,7 +162,9 @@
     prismlauncher
     corectrl
     lutris
-    wine-staging
+    #wine-staging
+    wineWowPackages.waylandFull
+    winetricks
     amdvlk
     minetest
     #mindustry
@@ -180,6 +181,7 @@
     inkscape
     freetube
     mpv
+    deluge-gtk
 
     # Virtualisation
     #waydroid
@@ -201,12 +203,11 @@
     bluez-tools
 
     # NixOS tools
-    #nixpkgsreview
     nixfmt
     alejandra
 
     # Office
-    libreoffice-still
+    libreoffice-fresh
     #teams
     drawio
     unstable.d2
@@ -215,13 +216,14 @@
     nextcloud-client
     homebank
     xfce.thunar
-
+    
     # Fonts
-    font-awesome
-    nerdfonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
+    #font-awesome
+    #nerdfonts
+    #noto-fonts
+    #noto-fonts-cjk
+    #noto-fonts-emoji
+    #google-fonts
 
     # Other
     feh
