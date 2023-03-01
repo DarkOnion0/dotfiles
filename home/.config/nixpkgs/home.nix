@@ -20,6 +20,7 @@ in {
     ./sway
     ./nix.nix
     ./style.nix
+    ./kitty
     (import ./packages.nix {inherit pkgs config unstable;})
   ];
 
