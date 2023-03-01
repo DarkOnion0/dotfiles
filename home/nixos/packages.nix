@@ -79,4 +79,13 @@
   environment.systemPackages = with pkgs; [
      gnome.gnome-keyring
   ];
+
+  fonts.fonts = with pkgs; [
+    font-awesome
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    google-fonts
+  ];
 }
