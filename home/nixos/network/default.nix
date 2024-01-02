@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Imports all config files
-  imports =
-    [
-      ./bluetooth.nix
-      ./ethernet.nix
-    ];
+  imports = [
+    ./bluetooth.nix
+    ./ethernet.nix
+  ];
 }

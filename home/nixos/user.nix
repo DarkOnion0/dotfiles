@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
@@ -14,10 +16,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dark = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" "libvirtd" "wireshark" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.fish;
+    extraGroups = ["wheel" "docker" "networkmanager" "libvirtd" "wireshark"]; # Enable ‘sudo’ for the user.
+    shell = pkgs.nushell;
   };
 
   # Global user settings
-  users.defaultUserShell = pkgs.fish;
+  users.defaultUserShell = pkgs.bash;
 }
