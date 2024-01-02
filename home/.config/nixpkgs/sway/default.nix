@@ -4,8 +4,7 @@
   lib,
   modulesPath,
   ...
-}: 
-{
+}: {
   imports = [
     ./misc.nix
   ];
@@ -14,48 +13,163 @@
     enable = true;
     wrapperFeatures.gtk = true;
     config = rec {
-      modifier = "Mod4";
-      # Use kitty as default terminal
-      terminal = "kitty";
+      # Screen
+
       startup = [
+        # Main
+        {command = "swaylock";}
+
         # Workspace 1
-        {command = "vivaldi";}
+        {command = "librewolf";}
 
         # Workspace 2
         {command = "kitty";}
 
         # Workspace 3
         {command = "obsidian";}
+        {command = "anki";}
 
         # Workspace 9
-        {command = "ferdium";}
+        {command = "brave";}
 
         # Workspace 10
         {command = "keepassxc";}
         {command = "corectrl";}
+
+        # Background
+        {command = "ulauncher --hide-window ";}
       ];
+
       workspaceLayout = "tabbed";
+      defaultWorkspace = "1";
+      workspaceOutputAssign = [
+        # Center Screen - AOC
+        {
+          output = "DP-3";
+          workspace = "1";
+        }
+        {
+          output = "DP-3";
+          workspace = "2";
+        }
+        {
+          output = "DP-3";
+          workspace = "3";
+        }
+        {
+          output = "DP-3";
+          workspace = "4";
+        }
+        {
+          output = "DP-3";
+          workspace = "5";
+        }
+
+        # Left Screen - PHILIPS
+        {
+          output = "HDMI-A-1";
+          workspace = "6";
+        }
+        {
+          output = "HDMI-A-1";
+          workspace = "7";
+        }
+        {
+          output = "HDMI-A-1";
+          workspace = "8";
+        }
+        {
+          output = "HDMI-A-1";
+          workspace = "9";
+        }
+        {
+          output = "HDMI-A-1";
+          workspace = "10";
+        }
+      ];
       assigns = {
-        "1" = [{class = "Vivaldi-stable";}];
+        "1" = [
+          {class = "Vivaldi-stable";}
+          {app_id = "librewolf";}
+        ];
         "2" = [
+          {class = "obsidian";}
+          {class = "Anki";}
+        ];
+        "6" = [
           {app_id = "kitty";}
           {app_id = "Alacritty";}
         ];
-        "3" = [{class = "obsidian";}];
-        "9" = [{class = "Ferdium";}];
+        "9" = [{class = "Brave-browser";}];
         "10" = [
           {app_id = "org.keepassxc.KeePassXC";}
           {app_id = "corectrl";}
           {class = "Spotify";}
         ];
       };
+      window = {
+        commands = [
+          # Ulauncher
+          {
+            command = "border none";
+            criteria = {
+              app_id = "ulauncher";
+            };
+          }
+
+          # Xcas
+          {
+            command = "floating enable";
+            criteria = {
+              title = "Configuration Graphique";
+              instance = "FLTK";
+            };
+          }
+          {
+            command = "floating enable";
+            criteria = {
+              title = "Index";
+              instance = "FLTK";
+            };
+          }
+          {
+            command = "floating enable";
+            criteria = {
+              title = "^Xcas Configuration.*";
+              instance = "FLTK";
+            };
+          }
+          {
+            command = "floating enable";
+            criteria = {
+              title = "^Xcas Fenêtre.*";
+              instance = "FLTK";
+            };
+          }
+        ];
+      };
+      output = {
+        DP-3 = {
+          mode = "2560x1440@143.912Hz";
+          pos = "0 0";
+        };
+        HDMI-A-1 = {
+          pos = "2560 0";
+        };
+      };
+
+      # Keyboard
+      modifier = "Mod4"; # Normal mode
+      #modifier = "Mod1"; # Sunshine streaming mode
+
       keybindings = lib.mkOptionDefault {
         # Generic Commands
         "${modifier}+Shift+a" = "kill";
 
         # Shortcut
         "${modifier}+l" = "exec swaylock";
-        "${modifier}+d" = "exec rofi -show drun -show-icons";
+        "${modifier}+d" = "exec ulauncher";
+        #"${modifier}+d" = "exec rofi -show drun -show-icons";
         "${modifier}+p" = "exec flameshot gui";
         "${modifier}+Shift+d" = "exec rofi -show window -show-icons";
         "${modifier}+c" = "exec rofi -modi 'clipboard:greenclip print' -show clipboard";
@@ -92,23 +206,30 @@
         "${modifier}+Shift+ccedilla" = "move container to workspace number 9";
         "${modifier}+Shift+agrave" = "move container to workspace number 10";
       };
+      input = {
+        "*" = {
+          xkb_layout = "fr";
+        };
+      };
+
+      # Misc
 
       bars = [
         {
           mode = "dock";
           fonts = {
-            size = 8.0;
-            names = ["FiraCode Nerd Font" "FontAwesome5Free"];
+            size = 10.0;
+            names = ["FiraCodeNerdFont" "FontAwesome5Free"];
           };
           command = "waybar";
           position = "top";
         }
       ];
+
+      # Use kitty as default terminal
+      terminal = "kitty";
     };
     extraConfig = ''
-      input type:keyboard {
-        xkb_layout fr
-      }
     '';
   };
 }

@@ -13,11 +13,6 @@
       effect-blur = "7x5";
     };
 
-    mako = {
-      enable = true;
-      defaultTimeout = 10000;
-    };
-
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
@@ -26,6 +21,13 @@
 
     waybar = {
       enable = true;
+    };
+  };
+
+  services = {
+    mako = {
+      enable = true;
+      defaultTimeout = 10000;
     };
   };
 }
