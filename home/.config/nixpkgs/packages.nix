@@ -18,9 +18,10 @@
 
   home.packages = with pkgs; [
     # Sway
-    swaylock-effects
+    #swaylock-effects
     swayidle
     wl-clipboard
+    ulauncher
 
     # CLI
     curl
@@ -29,15 +30,17 @@
     youtube-dl
     neofetch
     inxi
-    htop
+    btop
     zip
-    exa
+    unzip
     bat
     tree
     viddy
     p7zip
-    ripgrep
+    ripgrep # needed for telescope.nvim
     ranger
+    carapace
+    dua
 
     # Backup tool
     restic
@@ -46,7 +49,6 @@
 
     # Shell and prompt
     fish
-    zsh
     starship
     powerline
     fzf
@@ -54,25 +56,27 @@
     # Terminal app
     #kitty
     pixcat
+    alacritty
     tmux
 
     # WebBrowser
     firefox
     brave
     librewolf
-    vivaldi
-    vivaldi-widevine
-    vivaldi-ffmpeg-codecs
+    tor-browser-bundle-bin
+    #unstable.vivaldi
+    #unstable.vivaldi-ffmpeg-codecs
+    #unstable.widevine-cdm
 
     # KDE plasma
     #latte-dock
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ark
     libsForQt5.kcalc
-    libsForQt5.filelight
+    #libsForQt5.filelight
     libsForQt5.qt5.qttools
     libsForQt5.akonadi
-    libsForQt5.okular
+    #libsForQt5.okular
     libsForQt5.gwenview
     libsForQt5.karchive
     #libsForQt5.krunner
@@ -81,48 +85,42 @@
     #libsForQt5.kwallet
     #libsForQt5.kwallet-pam
     #libsForQt5.dolphin
-    #libsForQt5.breeze-qt5
+    libsForQt5.breeze-qt5
     libsForQt5.qtstyleplugins
     #libsForQt5.bismuth
-    libsForQt5.kalendar
+    #libsForQt5.kalendar
 
     # Productivity
-    unstable.ferdium
+    #unstable.ferdium
     #notion-app-enhanced
-    unstable.appflowy
+    #unstable.appflowy
     unstable.obsidian
-    zotero
-
-    # Printing
-    cups
-    gutenprint
+    #zotero
+    unstable.typst
 
     # Chat
     #element-desktop
-    #discord
-    #electron-mail
+    discord
     thunderbird
-    birdtray
+    teamspeak5_client
     #protonmail-bridge
     signal-desktop
 
     # Security
     keepassxc
+    pynitrokey
     wireshark
     arp-scan
     openssl
     nmap
-    #kubescape
     age
     gnupg
     pinentry-curses
     pinentry
-    #sops
 
     # Editor
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     unstable.neovim
-    #neovim-nightly
     vscodium
     jetbrains.idea-ultimate
     fd
@@ -132,56 +130,49 @@
     git
     delta
     go
-    nodejs-16_x
-    jdk
-    #yarn
-    #python3
+    nodejs_20
+    unstable.cargo
+    luajitPackages.luarocks
     gcc
+    cmake
     docker
     podman
     buildah
-    #skopeo
-    gitkraken
     dbeaver
-    #android-tools # Just for some android installation --> use nix-shell
     direnv
     universal-ctags
 
     # Server
-    #kubectl
-    #kubernetes-helm
     lens
     rpi-imager
     unstable.fly
-    #etcher
-    #ansible
-    #xrdp
-    #rustdesk
+    etcher
 
     # Gaming
     prismlauncher
     corectrl
     lutris
-    #wine-staging
     wineWowPackages.waylandFull
-    winetricks
+    #wineWowPackages.staging
     amdvlk
     minetest
-    #mindustry
+    mindustry
     gnome.zenity
     xterm
     xdelta
 
     # Multimedia
-    spotify
     vlc
     obs-studio
     libsForQt5.kdenlive
     gimp
     inkscape
+    gnome.adwaita-icon-theme # fix the missing icons in inkscape
+    krita
     freetube
     mpv
     deluge-gtk
+    calibre
 
     # Virtualisation
     #waydroid
@@ -194,6 +185,8 @@
     lm_sensors
     btrfs-progs
     btrfs-heatmap
+    ntfs3g
+    fuse3
 
     # Network
     networkmanagerapplet
@@ -203,30 +196,31 @@
     bluez-tools
 
     # NixOS tools
-    nixfmt
     alejandra
 
     # Office
     libreoffice-fresh
-    #teams
-    drawio
+    unstable.pandoc
+    unstable.drawio
     unstable.d2
     flameshot
     anki-bin
     nextcloud-client
     homebank
     xfce.thunar
-    
-    # Fonts
-    #font-awesome
-    #nerdfonts
-    #noto-fonts
-    #noto-fonts-cjk
-    #noto-fonts-emoji
-    #google-fonts
+    unstable.hplipWithPlugin
+    geogebra6
+    giac-with-xcas
+    unstable.sage
+    zathura
+
+    # 3D
+    freecad
+    blender
 
     # Other
     feh
     pavucontrol
+    xdg-utils
   ];
 }

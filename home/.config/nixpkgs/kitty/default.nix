@@ -1,15 +1,21 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  modulesPath,
+  ...
+}: {
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 11;
+      name = "JetBrainsMonoNerdFont";
+      size = 13;
       package = pkgs.nerdfonts;
     };
-    
+
     settings = {
       disable_ligatures = "never";
-      startup_session = "./sessions/default.conf";
+      startup_session = "${toString ./.}/default.conf";
     };
 
     theme = "Catppuccin-Macchiato";

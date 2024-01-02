@@ -21,7 +21,10 @@ in {
     ./nix.nix
     ./style.nix
     ./kitty
+    ./shell
     (import ./packages.nix {inherit pkgs config unstable;})
+    (import ./sunshine.nix {inherit pkgs config;})
+    (import ./security.nix {inherit pkgs config;})
   ];
 
   # This value determines the Home Manager release that your
