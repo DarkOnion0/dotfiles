@@ -1,18 +1,11 @@
 [directory]
-truncation_length = 8
 home_symbol = "~"
-
-[username]
-show_always = true
-format = "[$user]($style)@"
+truncation_length = 8
 
 [hostname]
-ssh_only = false
 format = "[$hostname]($style) "
+ssh_only = false
 
-#[git_metrics]
-#disabled = false
-
-#[character]
-#success_symbol = "[➜](bold green) "
-#error_symbol = "[➜ ](bold red) "
+[username]
+format = "[$user]($style)@"
+show_always = true
