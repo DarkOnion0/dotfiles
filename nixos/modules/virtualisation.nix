@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # Enable some virtualisation software (Podman, docker...)
   virtualisation = {
     podman = {

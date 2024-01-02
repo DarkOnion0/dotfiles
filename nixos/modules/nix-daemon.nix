@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }: {
-
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   nix = {
     gc = {
       automatic = true;
@@ -7,8 +11,7 @@
     };
 
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
-
 }

@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   networking = {
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.

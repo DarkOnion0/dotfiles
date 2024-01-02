@@ -1,33 +1,34 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, flake, ... }:
-
-let
-  inherit (flake) inputs;
-in
 {
+  config,
+  pkgs,
+  lib,
+  flake,
+  ...
+}: let
+  inherit (flake) inputs;
+in {
   # Imports all config files
-  imports =
-    [
-      # Update
-      ./../modules
+  imports = [
+    # Update
+    ./../modules
 
-      ./../modules/defautlDark/user.nix
-      ./../modules/defautlDark/packages.nix
-      ./../modules/defautlDark/nix-daemon.nix
+    ./../modules/defautlDark/user.nix
+    ./../modules/defautlDark/packages.nix
+    ./../modules/defautlDark/nix-daemon.nix
 
-      ./../modules/i3.nix
-      ./../modules/x11.nix
-      ./../modules/bluetooth.nix
-      ./../modules/virtualisation.nix
+    ./../modules/i3.nix
+    ./../modules/x11.nix
+    ./../modules/bluetooth.nix
+    ./../modules/virtualisation.nix
 
-      #./modules/gpu.nix
-      ./modules/network.nix
+    #./modules/gpu.nix
+    ./modules/network.nix
 
-      ./boot.nix
-    ];
+    ./boot.nix
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
-  services.xserver.videoDrivers = [ "amdgpu-pro" ];
+  services.xserver.videoDrivers = ["amdgpu-pro"];
 
   # Enable OpenGL/OpenCL support
   hardware.opengl.enable = true;
