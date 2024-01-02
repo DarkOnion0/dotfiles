@@ -1,4 +1,5 @@
 local present, treesitter = pcall(require, "nvim-treesitter.configs")
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 if not present then
   return
@@ -33,10 +34,21 @@ local autoCommands = {
 
 M.nvim_create_augroups(autoCommands)
 
+parser_config.nu = {
+  install_info = {
+    url = "https://github.com/nushell/tree-sitter-nu",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+  filetype = "nu",
+}
+
 local options = {
   ensure_installed = {
     "lua",
     "go",
+    "gomod",
+    "gosum",
     "python",
     "javascript",
     "typescript",
@@ -51,8 +63,11 @@ local options = {
     "html",
     "markdown",
     "rust",
+    "toml",
     "regex",
-    "markdown_inline"
+    "markdown_inline",
+    "nu",
+    "jsonnet"
   },
 
   sync_install = false,

@@ -29,7 +29,7 @@ timer:start(1, 60, vim.schedule_wrap(function() -- run the timer every 1 minute
     local hour = tonumber(os.date('%H'))
     local bg = 'dark'
 
-    if hour >= 7 and hour <= 19 then
+    if hour >= 7 and hour < 18 then
         bg = 'light'
     end
 
