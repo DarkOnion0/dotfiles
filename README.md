@@ -5,4 +5,3 @@ My personal dotfiles for my **\*nix** system (currently [NixOS](https://nixos.or
 <!--
 TODO: add an how to / guide
 -->
-

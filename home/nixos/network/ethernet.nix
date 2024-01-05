@@ -16,9 +16,9 @@
   networking.firewall = {
     enable = true;
     # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
+    trustedInterfaces = ["tailscale0"];
     # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    allowedUDPPorts = [config.services.tailscale.port];
   };
   networking.firewall.allowedTCPPorts = [
     # Python web server
