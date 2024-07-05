@@ -9,7 +9,7 @@
     enable = true;
     font = {
       name = "JetBrainsMonoNerdFont";
-      size = 13;
+      size = 15;
       package = pkgs.nerdfonts;
     };
 

@@ -27,10 +27,16 @@
 
         # Workspace 3
         {command = "obsidian";}
-        {command = "anki";}
+        #{command = "anki";}
+
+        # Workspace 8
+        #{command = "brave";}
+        #{command = "flatpak run dev.aunetx.deezer";}
 
         # Workspace 9
-        {command = "brave";}
+        {command = "sleep 10 && element-dekstop";}
+        {command = "discord";}
+        {command = "sleep 10 && signal-dekstop";}
 
         # Workspace 10
         {command = "keepassxc";}
@@ -100,7 +106,15 @@
           {app_id = "kitty";}
           {app_id = "Alacritty";}
         ];
-        "9" = [{class = "Brave-browser";}];
+        "8" = [
+          {class = "Brave-browser";}
+          {class = "Deezer";}
+        ];
+        "9" = [
+          {class = "Element";}
+          {class = "discord";}
+          {class = "Signal";}
+        ];
         "10" = [
           {app_id = "org.keepassxc.KeePassXC";}
           {app_id = "corectrl";}
@@ -148,12 +162,19 @@
           }
         ];
       };
-      output = {
+      output = let
+        bg = "/home/dark/Blender/render/learning_render8V3.png fill";
+      in {
         DP-3 = {
+          #inherit bg;
+
           mode = "2560x1440@143.912Hz";
+          #scale = "1.15"; # Make things look blury...
           pos = "0 0";
         };
         HDMI-A-1 = {
+          #inherit bg;
+
           pos = "2560 0";
         };
       };
@@ -167,7 +188,7 @@
         "${modifier}+Shift+a" = "kill";
 
         # Shortcut
-        "${modifier}+l" = "exec swaylock";
+        "${modifier}+Escape" = "exec swaylock";
         "${modifier}+d" = "exec ulauncher";
         #"${modifier}+d" = "exec rofi -show drun -show-icons";
         "${modifier}+p" = "exec flameshot gui";

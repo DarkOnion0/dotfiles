@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   unstable,
   ...
 }: {
@@ -15,6 +14,8 @@
   #  package = pkgs.eww-wayland;
   #  configDir = "${config.home.homeDirectory}/Programmation/git/dotfiles/home/.config/eww/";
   #};
+
+  services.easyeffects.enable = true;
 
   home.packages = with pkgs; [
     # Sway
@@ -41,11 +42,13 @@
     ranger
     carapace
     dua
+    difftastic
 
     # Backup tool
     restic
     syncthing
     gparted
+    localsend
 
     # Shell and prompt
     fish
@@ -94,35 +97,37 @@
     #unstable.ferdium
     #notion-app-enhanced
     #unstable.appflowy
-    unstable.obsidian
-    #zotero
+    obsidian
+    unstable.openboard
+    zotero
     unstable.typst
+    pdfpc
+    unstable.polylux2pdfpc
 
     # Chat
-    #element-desktop
+    element-desktop
     discord
     thunderbird
-    teamspeak5_client
+    #teamspeak5_client
     #protonmail-bridge
     signal-desktop
 
     # Security
     keepassxc
     pynitrokey
+    nitrokey-app2
     wireshark
     arp-scan
     openssl
     nmap
     age
     gnupg
-    pinentry-curses
-    pinentry
+    #pinentry-curses
+    #pinentry
 
     # Editor
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    unstable.neovim
+    neovim
     vscodium
-    jetbrains.idea-ultimate
     fd
     tree-sitter
 
@@ -131,22 +136,29 @@
     delta
     go
     nodejs_20
-    unstable.cargo
     luajitPackages.luarocks
     gcc
     cmake
     docker
     podman
-    buildah
-    dbeaver
-    direnv
-    universal-ctags
+    dbeaver-bin
+    #gopls # lsp
+    biome #lsp + other things
+    vscode-langservers-extracted # lsp (html, css, json, eslint)
+    emmet-ls # lsp
+    nil # lsp
+    lua-language-server # lsp
+    docker-ls # lsp
+    yaml-language-server # lsp
+    taplo # lsp
+    typst-lsp # lsp
+    unstable.tinymist # lsp
+    #tailwindcss-language-server # lsp
+    #nodePackages.svelte-language-server # lsp
+    #nodePackages.typescript-language-server # lsp
 
     # Server
-    lens
     rpi-imager
-    unstable.fly
-    etcher
 
     # Gaming
     prismlauncher
@@ -172,7 +184,7 @@
     freetube
     mpv
     deluge-gtk
-    calibre
+    unstable.calibre
 
     # Virtualisation
     #waydroid
@@ -203,24 +215,30 @@
     unstable.pandoc
     unstable.drawio
     unstable.d2
+    #d2
     flameshot
     anki-bin
     nextcloud-client
     homebank
     xfce.thunar
     unstable.hplipWithPlugin
-    geogebra6
+    #geogebra6
     giac-with-xcas
-    unstable.sage
+    #unstable.sage
     zathura
+    unstable.rnote
+    taskwarrior3
+    timewarrior
 
     # 3D
     freecad
+    #blender-hip # Not working :(
     blender
 
     # Other
     feh
     pavucontrol
     xdg-utils
+    unstable.ollama
   ];
 }

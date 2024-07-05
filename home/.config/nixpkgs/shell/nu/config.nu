@@ -141,7 +141,7 @@ let light_theme = {
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
-    show_banner: true # true or false to enable or disable the welcome banner at startup
+    show_banner: false # true or false to enable or disable the welcome banner at startup
 
     ls: {
         use_ls_colors: true # use the LS_COLORS environment variable to colorize output
@@ -761,11 +761,12 @@ $env.config = {
 
 # ALIASES
 
-alias e = nvim --listen /tmp/darknvimsocket
+alias e = nvim
+#alias e = hx
 alias vi = nvim 
 alias j = just 
 alias python = python3 
-alias jupyter-lab = nix-shell -p python3 python3Packages.numpy python3Packages.matplotlib python3Packages.scipy python3Packages.jupyterlab texlive.combined.scheme-full --command jupyter-lab
+alias jlab = nix-shell -p python3 python3Packages.numpy python3Packages.matplotlib python3Packages.scipy python3Packages.jupyterlab texlive.combined.scheme-full --command jupyter-lab
 
 alias c = bat 
 alias cat = open
@@ -778,9 +779,9 @@ alias kscan = kubescape scan framework nsa
 
 alias serve_file = python3 -m http.server
 
-alias tn = tmux new 
-alias ta = tmux attach 
-alias tk = tmux kill-session -t	
+#alias tn = tmux new 
+#alias ta = tmux attach 
+#alias tk = tmux kill-session -t	
 
 alias nixos-edit = sudo nvim /etc/nixos/configuration.nix
 alias nixos-switch = sudo nixos-rebuild switch
@@ -805,6 +806,9 @@ alias pomodoroCounter = nix run github:DarkOnion0/PomodoroCounter#cli --
 alias pandocTheming = nix run /home/dark/Programmation/git/PandocTheming2/ -- 
 
 alias rebootToWindows = systemctl reboot --boot-loader-entry=auto-windows
+
+alias t = task
+alias td = task +TODAY or +OVERDUE
 
 # CUSTOM COMMANDS
 
@@ -880,6 +884,8 @@ def diskusage [] {
 if (tty) == "/dev/tty1" { sway }
 
 gpg-connect-agent updatestartuptty /bye >/dev/null # Enable GPG Agent
+
+task +TODAY or +OVERDUE
 
 # PLUGINS / EXTENSIONS
 

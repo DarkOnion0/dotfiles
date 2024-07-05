@@ -1,6 +1,5 @@
 {
   config,
-  writeTextFile,
   pkgs,
   ...
 }: let
@@ -18,12 +17,22 @@ in {
 
   imports = [
     ./sway
+
     ./nix.nix
+
     ./style.nix
+
+    (import ./packages.nix {inherit pkgs config unstable;})
+
     ./kitty
     ./shell
-    (import ./packages.nix {inherit pkgs config unstable;})
-    (import ./sunshine.nix {inherit pkgs config;})
+    (import ./helix {inherit unstable;})
+
+    #(import ./sunshine.nix {inherit pkgs config;})
+
+    (import ./ai.nix {inherit pkgs config;})
+    #(import ./sage.nix {inherit pkgs config;})
+
     (import ./security.nix {inherit pkgs config;})
   ];
 

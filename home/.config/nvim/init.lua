@@ -12,7 +12,7 @@ require('shortcuts')
 
 --require('plugins/airline')
 --require('plugins/ale')
-require('plugins/mason')
+--require('plugins/mason')
 require('plugins/nvim-cmp')
 require('plugins/lsp')
 require('plugins/emmet')
@@ -37,6 +37,8 @@ require('plugins/lualine')
 require('plugins/bufferline')
 require('plugins/yanky')
 require('plugins/gitsigns-nvim')
+require('plugins/lspsaga')
+require('plugins/diagflow')
 --require('plugins/vim-grammarous')
 
 --
