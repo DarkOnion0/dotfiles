@@ -28,7 +28,7 @@ in {
     ./shell
     (import ./helix {inherit unstable;})
 
-    #(import ./sunshine.nix {inherit pkgs config;})
+    (import ./sunshine.nix {inherit pkgs config;})
 
     (import ./ai.nix {inherit pkgs config;})
     #(import ./sage.nix {inherit pkgs config;})

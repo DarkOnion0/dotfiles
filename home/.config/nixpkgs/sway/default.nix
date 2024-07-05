@@ -1,10 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  modulesPath,
-  ...
-}: {
+{lib, ...}: {
   imports = [
     ./misc.nix
   ];
@@ -239,7 +233,6 @@
         {
           mode = "dock";
           fonts = {
-            size = 10.0;
             names = ["FiraCodeNerdFont" "FontAwesome5Free"];
           };
           command = "waybar";

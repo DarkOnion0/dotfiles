@@ -777,7 +777,7 @@ alias k = kubectl
 alias h = helm 
 alias kscan = kubescape scan framework nsa 
 
-alias serve_file = python3 -m http.server
+alias serve_file = nix run nixpkgs#python3 -- -m http.server
 
 #alias tn = tmux new 
 #alias ta = tmux attach 

@@ -40,7 +40,6 @@
     p7zip
     ripgrep # needed for telescope.nvim
     ranger
-    carapace
     dua
     difftastic
 
@@ -232,8 +231,7 @@
 
     # 3D
     freecad
-    #blender-hip # Not working :(
-    blender
+    blender-hip
 
     # Other
     feh
