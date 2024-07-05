@@ -14,6 +14,7 @@
 vim.cmd.colorscheme("catppuccin")
 
 local timer = vim.loop.new_timer()
+vim.g.auto_switch = true
 
 function switchDark()
 	--vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
@@ -36,7 +37,7 @@ timer:start(
 			bg = "light"
 		end
 
-		if vim.o.bg ~= bg then
+		if vim.o.bg ~= bg and vim.g.auto_switch then
 			if bg == "dark" then
 				switchDark()
 			else

@@ -1,196 +1,225 @@
--- Setup auto-recompilation of the packer config
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- Install lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
 -- The plugins list
-return require("packer").startup({
-	function()
-		-- Packer can manage itself
-		use("wbthomason/packer.nvim")
+return require("lazy").setup({
+    -- Packer can manage itself
+    "wbthomason/packer.nvim",
 
-		-- ide
-		use({
-			-- base software
-			-- "williamboman/mason.nvim",
+    -- ide
+    {
+        -- base software
+        -- "williamboman/mason.nvim",
 
-			-- lsp
-			-- "williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
-			"nvimdev/lspsaga.nvim", --> lsp sugar
-			"onsails/lspkind-nvim", --> vscode-like pictograms for neovim lsp completion items
-            'dgagn/diagflow.nvim', --> display lsp message in the top right corner
+        -- lsp
+        -- "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+        "nvimdev/lspsaga.nvim", --> lsp sugar
+        "onsails/lspkind-nvim", --> vscode-like pictograms for neovim lsp completion items
+        'dgagn/diagflow.nvim', --> display lsp message in the top right corner
 
-			-- dap
-			"mfussenegger/nvim-dap",
+        -- dap
+        "mfussenegger/nvim-dap",
 
-			-- linters / formatters
-			"jose-elias-alvarez/null-ls.nvim",
+        -- linters / formatters
+        "jose-elias-alvarez/null-ls.nvim",
 
-			-- completion
-			"L3MON4D3/LuaSnip", --> snippets in completion
-			"saadparwaiz1/cmp_luasnip", --> integration with the completion engine
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/nvim-cmp",
+        -- completion
+        "L3MON4D3/LuaSnip",   --> snippets in completion
+        "saadparwaiz1/cmp_luasnip", --> integration with the completion engine
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        {
+            "hrsh7th/nvim-cmp",
+            -- load cmp on InsertEnter
+            event = "InsertEnter",
+            -- these dependencies will only be loaded when cmp loads
+            -- dependencies are always lazy-loaded unless specified otherwise
+            dependencies = {
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-path",
+                "L3MON4D3/LuaSnip",
+                "saadparwaiz1/cmp_luasnip",
+            },
+        },
 
-			-- other
-			{ "j-hui/fidget.nvim", opts = {} },
-			"folke/neodev.nvim",
-			"nvim-lua/plenary.nvim",
-		})
+        -- other
+        { "j-hui/fidget.nvim", event="VeryLazy", opts = {} },
+        "folke/neodev.nvim",
+        "nvim-lua/plenary.nvim",
+    },
 
-		use({ --> awesome UI
-			"folke/noice.nvim",
-			event = "VimEnter",
-			config = function()
-				require("noice").setup({
-					lsp = {
-						-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-						override = {
-							["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-							["vim.lsp.util.stylize_markdown"] = true,
-							["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-						},
-					},
-					-- you can enable a preset for easier configuration
-					presets = {
-						bottom_search = false, -- use a classic bottom cmdline for search
-						command_palette = true, -- position the cmdline and popupmenu together
-						long_message_to_split = true, -- long messages will be sent to a split
-						inc_rename = false, -- enables an input dialog for inc-rename.nvim
-						lsp_doc_border = true, -- add a border to hover docs and signature help
-					},
-				})
-			end,
-			requires = {
-				"MunifTanjim/nui.nvim",
-				"rcarriga/nvim-notify",
-			},
-		})
-		use({ --> Little git signs on the left side of the screen
-			"lewis6991/gitsigns.nvim",
-		})
-		--use 'tpope/vim-fugitive'
+    { --> awesome UI
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
 
-		-- use 'preservim/tagbar'
-		use({
-			"utilyre/sentiment.nvim",
-			tag = "*",
-			config = function()
-				require("sentiment").setup({})
-			end,
-		})
-		use({
-			"windwp/nvim-autopairs",
-			config = function()
-				require("nvim-autopairs").setup({})
-			end,
-		})
+        {
+            "folke/noice.nvim",
+            -- event = "VeryLazy",
+            lazy = false,    -- make sure we load this during startup
+            priority = 999, -- make sure to load this before all the other start plugins (except the theme)
+            config = function()
+                require("noice").setup({
+                    lsp = {
+                        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                        override = {
+                            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                            ["vim.lsp.util.stylize_markdown"] = true,
+                            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                        },
+                    },
+                    -- you can enable a preset for easier configuration
+                    presets = {
+                        bottom_search = false, -- use a classic bottom cmdline for search
+                        command_palette = true, -- position the cmdline and popupmenu together
+                        long_message_to_split = true, -- long messages will be sent to a split
+                        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                        lsp_doc_border = true, -- add a border to hover docs and signature help
+                    },
+                })
+            end,
+            dependencies = {
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+            },
+        }
 
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = {
-				"nvim-lua/plenary.nvim",
-				"BurntSushi/ripgrep",
-				"sharkdp/fd",
-				"nvim-treesitter/nvim-treesitter",
-				"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-				"nvim-telescope/telescope-github.nvim",
-			},
-		})
-		use({
-			"nvim-telescope/telescope-fzf-native.nvim",
-			run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-		})
+    },
+    { --> Little git signs on the left side of the screen
+        "lewis6991/gitsigns.nvim",
+    },
+    --use 'tpope/vim-fugitive'
 
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-		})
-		--use({
-		--	"nvim-treesitter/nvim-treesitter-context",
-		--	requires = {
-		--		"nvim-treesitter/nvim-treesitter",
-		--	},
-		--})
+    -- use 'preservim/tagbar'
+    {
+        "utilyre/sentiment.nvim",
+        event = "VeryLazy",
+        init = function()
+          -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+          vim.g.loaded_matchparen = 1
+        end,
+    },
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup({})
+        end,
+    },
 
-		use({ "editorconfig/editorconfig-vim" })
+    {"BurntSushi/ripgrep", lazy=true},
+    {"sharkdp/fd", lazy=true},
+    {"nvim-telescope/telescope-github.nvim", lazy=true},
+    {
+        "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "BurntSushi/ripgrep",
+            "sharkdp/fd",
+            "nvim-treesitter/nvim-treesitter",
+            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-telescope/telescope-github.nvim",
+            "nvim-telescope/telescope-fzf-native.nvim",
+        },
+    },
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    },
 
-		-- editor
-		use({ "mhinz/vim-startify" })
+    {
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+    },
+    --{
+    --	"nvim-treesitter/nvim-treesitter-context",
+    --	requires = {
+    --		"nvim-treesitter/nvim-treesitter",
+    --	},
+    --})
 
-		use("wakatime/vim-wakatime")
+    { "editorconfig/editorconfig-vim" },
 
-		use({ "mbbill/undotree" })
+    -- editor
+    { "mhinz/vim-startify" },
 
-		--use { 'junegunn/rainbow_parentheses.vim' }
+    "wakatime/vim-wakatime",
 
-		--use({ "psliwka/vim-smoothie" })
-		use({ 
-            "karb94/neoscroll.nvim", 
-            config = function ()
-                require('neoscroll').setup {}
-            end
-        })
+    { "mbbill/undotree", cmd="UndotreeToggle" },
 
-		use({ "gbprod/yanky.nvim" })
+    --use { 'junegunn/rainbow_parentheses.vim' }
 
-		--use "rhysd/vim-grammarous"
+    {
+        "karb94/neoscroll.nvim",
+        config = function()
+            require('neoscroll').setup {}
+        end
+    },
 
-		use({
-			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v2.x",
-			requires = {
-				"nvim-lua/plenary.nvim",
-				"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-				"MunifTanjim/nui.nvim",
-			},
-		})
+    { "gbprod/yanky.nvim", lazy=true, },
 
-		-- use({
-		-- 	-- Add indentation guides even on blank lines
-		-- 	"lukas-reineke/indent-blankline.nvim",
-		-- 	-- Enable `lukas-reineke/indent-blankline.nvim`
-		-- 	-- See `:help indent_blankline.txt`
-		-- 	opts = {
-		-- 		char = "┊",
-		-- 		show_trailing_blankline_indent = false,
-		-- 	},
-		-- })
+    --use "rhysd/vim-grammarous"
 
-        use({
-            "folke/zen-mode.nvim",
-        })
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        cmd="NeoTreeFocusToggle",
+        branch = "v2.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        },
+    },
 
-		-- status bar
-		use({
-			"nvim-lualine/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		})
-		use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "kyazdani42/nvim-web-devicons" })
+    -- {
+    -- 	-- Add indentation guides even on blank lines
+    -- 	"lukas-reineke/indent-blankline.nvim",
+    -- 	-- Enable `lukas-reineke/indent-blankline.nvim`
+    -- 	-- See `:help indent_blankline.txt`
+    -- 	opts = {
+    -- 		char = "┊",
+    -- 		show_trailing_blankline_indent = false,
+    -- 	},
+    -- })
 
-		-- themes
-		use({
-			"catppuccin/nvim",
-			as = "catppuccin",
-		})
+    {
+        "folke/zen-mode.nvim", cmd="ZenMode",
+    },
 
-		-- log
-		use({ "MTDL9/vim-log-highlighting", ft = "log" })
+    -- status bar
+    {
+        "nvim-lualine/lualine.nvim",
+        requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    },
+    { "akinsho/bufferline.nvim", version = "v4.*", requires = "kyazdani42/nvim-web-devicons" },
 
-		-- d2
-		use({ "terrastruct/d2-vim", ft = "d2" })
+    -- themes
+    {
+        "catppuccin/nvim",
+        as = "catppuccin",
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+    },
 
-		-- rust
-		use({ "simrat39/rust-tools.nvim" })
-	end,
-	config = {
-		display = {
-			open_fn = require("packer.util").float,
-		},
-	},
+    -- log
+    { "MTDL9/vim-log-highlighting", ft = "log" },
+
+    -- d2
+    { "terrastruct/d2-vim", ft = "d2" },
+
+    -- rust
+    { "simrat39/rust-tools.nvim", ft="rust" },
 })
