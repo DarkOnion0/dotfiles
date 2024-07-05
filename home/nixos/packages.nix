@@ -2,9 +2,7 @@
   pkgs,
   config,
   ...
-}: let
-  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
-in {
+}: {
   imports = [<home-manager/nixos>];
   ################################################################
   ## List packages installed in system profile. To search, run: ##
@@ -37,7 +35,7 @@ in {
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "curses";
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   # Enable steam as the doc says
@@ -84,9 +82,10 @@ in {
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-keyring
+    amf-headers
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     font-awesome_5
     font-awesome_6
     nerdfonts

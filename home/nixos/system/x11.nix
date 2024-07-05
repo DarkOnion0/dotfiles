@@ -6,6 +6,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["amdgpu"];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
 
   # Gnome specific settings
   #services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];

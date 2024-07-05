@@ -12,7 +12,7 @@
   boot.initrd.availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "coretemp" "nct6775"];
-  boot.extraModulePackages = [];
+  #boot.extraModulePackages = [ pkgs.linuxKernel.packages.linux_zen.ryzen-smu ];
   boot.supportedFilesystems = ["ntfs"];
 
   fileSystems."/" = {

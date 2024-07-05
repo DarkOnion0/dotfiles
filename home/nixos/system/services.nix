@@ -16,6 +16,8 @@
       enable = true;
     };
 
+    waydroid.enable = true;
+
     libvirtd = {
       enable = true;
     };
@@ -74,7 +76,7 @@
   services.printing.enable = true;
   services.printing.drivers = [pkgs.gutenprint pkgs.hplip pkgs.hplipWithPlugin];
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
   services.avahi.openFirewall = true;
 
   # Enable sound.
@@ -113,4 +115,28 @@
     updater.enable = true;
     daemon.enable = true;
   };
+
+  # TMP Server
+  #services.caddy = {
+  #  enable = true;
+  #  user = "root";
+
+  #  virtualHosts = {
+  #    "corsaire-nixos.tailb2539.ts.net" = {
+  #      extraConfig = ''
+  #        handle_path /ai/* {
+  #          reverse_proxy localhost:8080
+  #        }
+
+  #        handle_path /news/* {
+  #          reverse_proxy localhost:8082
+  #        }
+
+  #        handle_path /spreadsheet/* {
+  #          reverse_proxy localhost:8484
+  #        }
+  #      '';
+  #    };
+  #  };
+  #};
 }

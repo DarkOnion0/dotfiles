@@ -16,21 +16,22 @@
   networking.firewall = {
     enable = true;
     # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
-    # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    trustedInterfaces = ["tailscale0"];
   };
   networking.firewall.allowedTCPPorts = [
     # Python web server
     8000
   ];
-  #networking.firewall.allowedUDPPorts = [
-  #  # Sunshine
-  #  47998 # Video
-  #  47999 # Control
-  #  48000 # Audio
-  #  48002 # Mic
-  #];
+  networking.firewall.allowedUDPPorts = [
+    # allow the Tailscale UDP port through the firewall
+    config.services.tailscale.port
+
+    # Sunshine -> doesn't work
+    # 47998 # Video
+    # 47999 # Control
+    # 48000 # Audio
+    # 48002 # Mic
+  ];
 
   # Set default DNS
   networking = {

@@ -29,6 +29,11 @@
     #amdvlk
   ];
 
+  # HIP
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
   # Enable vulkan support
   hardware.opengl.driSupport = true;
   # For 32 bit applications
