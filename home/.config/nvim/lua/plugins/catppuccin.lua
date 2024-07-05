@@ -1,12 +1,12 @@
 require("catppuccin").setup()
-vim.api.nvim_command "colorscheme catppuccin"
+vim.api.nvim_command("colorscheme catppuccin")
 
 require("catppuccin").setup({
-    flavour = "latte",
-    background = { -- :h background
-        light = "latte",
-        dark = "macchiato",
-    },
+	flavour = "latte",
+	background = { -- :h background
+		light = "latte",
+		dark = "macchiato",
+	},
 	compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 	transparent_background = false,
 	term_colors = false,
@@ -35,8 +35,8 @@ require("catppuccin").setup({
 		nvimtree = true,
 		telescope = true,
 		treesitter = true,
-        treesitter_context = true,
-        notify = true,
+		treesitter_context = true,
+		notify = true,
 	},
 	color_overrides = {},
 	custom_highlights = {},
