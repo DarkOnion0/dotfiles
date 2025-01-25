@@ -1,7 +1,7 @@
 [user]
 	name = DarkOnion0
 	email = darkonion0@clapot.org
-	signingkey = 852A39E50BA9083B
+	signingkey = 93C4D103CCBBE24C
 
 [core]
 	editorgit = nvim
