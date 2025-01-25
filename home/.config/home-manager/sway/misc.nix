@@ -89,9 +89,9 @@
       };
 
       #style = ''
-      #  .topbar { 
+      #  .topbar {
       #    font-size: 15px;
-      #  } 
+      #  }
       #'';
     };
   };

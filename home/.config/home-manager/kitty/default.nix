@@ -1,16 +1,10 @@
-{
-  pkgs,
-  lib,
-  config,
-  modulesPath,
-  ...
-}: {
+{pkgs, ...}: {
   programs.kitty = {
     enable = true;
     font = {
       name = "JetBrainsMonoNerdFont";
-      size = 15;
-      package = pkgs.nerdfonts;
+      size = 10.5;
+      package = (pkgs.nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "IBMPlexMono" ]; });
     };
 
     settings = {
@@ -18,6 +12,7 @@
       startup_session = "${toString ./.}/default.conf";
     };
 
-    theme = "Catppuccin-Macchiato";
+    #theme = "Catppuccin-Latte";
+    #theme = "Catppuccin-Macchiato";
   };
 }

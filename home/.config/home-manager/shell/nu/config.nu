@@ -763,25 +763,25 @@ $env.config = {
 
 alias e = nvim
 #alias e = hx
-alias vi = nvim 
-alias j = just 
-alias python = python3 
+alias vi = nvim
+alias j = just
+alias python = python3
 alias jlab = nix-shell -p python3 python3Packages.numpy python3Packages.matplotlib python3Packages.scipy python3Packages.jupyterlab texlive.combined.scheme-full --command jupyter-lab
 
-alias c = bat 
+alias c = bat
 alias cat = open
-#alias ls = exa 
-#alias l = exa -al 
+#alias ls = exa
+#alias l = exa -al
 
-alias k = kubectl 
-alias h = helm 
-alias kscan = kubescape scan framework nsa 
+alias k = kubectl
+alias h = helm
+alias kscan = kubescape scan framework nsa
 
 alias serve_file = nix run nixpkgs#python3 -- -m http.server
 
-#alias tn = tmux new 
-#alias ta = tmux attach 
-#alias tk = tmux kill-session -t	
+#alias tn = tmux new
+#alias ta = tmux attach
+#alias tk = tmux kill-session -t
 
 alias nixos-edit = sudo nvim /etc/nixos/configuration.nix
 alias nixos-switch = sudo nixos-rebuild switch
@@ -789,25 +789,27 @@ alias nixos-clear = sudo nix-collect-garbage
 alias nixos-delroot = sudo nix-collect-garbage -d
 alias nixos-update = sudo nixos-rebuild switch --upgrade
 
-alias hm = home-manager 
+alias hm = home-manager
 
+alias lg = lazygit # Add an alias for lazygit
 alias g = git  # Add an alias for git
-alias gs = git status 
-alias gl = git log 
-alias gc = git commit 
-alias gp = git push 
-alias gpl = git pull 
-alias gd = git diff 
+alias gs = git status
+alias gl = git log
+alias gc = git commit
+alias gp = git push
+alias gpl = git pull
+alias gd = git diff
 
-alias f = fzf 
-alias ff = fzf --preview 'bat --color always {}' 
+alias f = fzf
+alias ff = fzf --preview 'bat --color always {}'
 
-alias pomodoroCounter = nix run github:DarkOnion0/PomodoroCounter#cli -- 
-alias pandocTheming = nix run /home/dark/Programmation/git/PandocTheming2/ -- 
+alias pomodoroCounter = nix run github:DarkOnion0/PomodoroCounter#cli --
+alias pandocTheming = nix run /home/dark/Programmation/git/PandocTheming2/ --
 
 alias rebootToWindows = systemctl reboot --boot-loader-entry=auto-windows
 
 alias t = task
+alias tt = taskwarrior-tui
 alias td = task +TODAY or +OVERDUE
 
 # CUSTOM COMMANDS
@@ -858,7 +860,7 @@ def anagramme [
 
     if $repeat > 1 {
         for i in 0..($repeat - 1) {
-            $env.output = ($env.output | append (str_random $env.input | str join "" | str capitalize))       
+            $env.output = ($env.output | append (str_random $env.input | str join "" | str capitalize))
         }
         print $env.output
     } else {
@@ -879,14 +881,30 @@ def diskusage [] {
 
 }
 
-# SCRIPTS
+def md2anki [input = ""] {
+    def convert [path: string] {
+        pandoc -i $path -o /tmp/tmp_md2anki.html --mathjax="https://cdn.jsdelivr.net/npm/mathjax-full@3.2.2/es5/tex-mml-svg.min.js"
+        open /tmp/tmp_md2anki.html | wl-copy
+        open /tmp/tmp_md2anki.html
+    }
 
-if (tty) == "/dev/tty1" { sway }
+    if $input == "" {
+        let path = "/tmp/tmp.md"
+
+        "" | save -f $path
+        nvim $path
+        convert $path
+    } else {
+        convert $input
+    }
+}
+
+# SCRIPTS
 
 gpg-connect-agent updatestartuptty /bye >/dev/null # Enable GPG Agent
 
-task +TODAY or +OVERDUE
+task +TODAY; task +OVERDUE
 
 # PLUGINS / EXTENSIONS
 
-source ~/.cache/carapace/init.nu
+#source ~/.cache/carapace/init.nu

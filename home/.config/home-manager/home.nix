@@ -16,11 +16,11 @@ in {
   # Imports
 
   imports = [
-    ./sway
+    #./sway
 
     ./nix.nix
 
-    ./style.nix
+    #./style.nix
 
     (import ./packages.nix {inherit pkgs config unstable;})
 
@@ -28,12 +28,12 @@ in {
     ./shell
     (import ./helix {inherit unstable;})
 
-    (import ./sunshine.nix {inherit pkgs config;})
+    #(import ./sunshine.nix {inherit pkgs config;})
 
-    (import ./ai.nix {inherit pkgs config;})
+    #(import ./ai.nix {inherit pkgs config;})
     #(import ./sage.nix {inherit pkgs config;})
 
-    (import ./security.nix {inherit pkgs config;})
+    ./security.nix
   ];
 
   # This value determines the Home Manager release that your
@@ -44,5 +44,5 @@ in {
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "21.11";
+  home.stateVersion = "24.05";
 }

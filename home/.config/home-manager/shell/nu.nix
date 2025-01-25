@@ -4,10 +4,15 @@
     configFile.source = ./nu/config.nu;
     envFile.source = ./nu/env.nu;
   };
+
   programs.carapace = {
     enable = true;
     enableNushellIntegration = true;
-    enableFishIntegration = false;
-    enableZshIntegration = false;
   };
+
+  programs.direnv.enableNushellIntegration = true;
+
+  programs.zoxide.enableNushellIntegration = true;
+
+  programs.starship.enableNushellIntegration = true;
 }

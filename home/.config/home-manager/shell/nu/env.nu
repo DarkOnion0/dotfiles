@@ -71,8 +71,7 @@ $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
 # $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
 
 # Specifies how environment variables are:
-# - converted from a string to a value on Nushell startup (from_string)
-# - converted from a value back to a string when running external commands (to_string)
+# - converted from a string to a value on Nushell startup (from_string) - converted from a value back to a string when running external commands (to_string)
 # Note: The conversions happen *after* config.nu is loaded
 $env.ENV_CONVERSIONS = {
     "PATH": {
@@ -102,3 +101,7 @@ $env.NU_PLUGIN_DIRS = [
 
 # Enable GPG Agent
 $env.GPG_TTY = (tty)
+$env.SSH_AUTH_SOCK = (gpgconf --list-dirs agent-ssh-socket)
+
+# Set my default editor to be neovim
+$env.EDITOR = "nvim"

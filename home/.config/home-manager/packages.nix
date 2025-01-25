@@ -20,45 +20,49 @@
   home.packages = with pkgs; [
     # Sway
     #swaylock-effects
-    swayidle
+    #swayidle
     wl-clipboard
-    ulauncher
+    #ulauncher
 
     # CLI
     curl
     killall
     wget
-    youtube-dl
-    neofetch
+    yt-dlp
+    vdhcoapp
     inxi
     btop
+    nvtopPackages.amd
+    powertop
     zip
     unzip
     bat
     tree
-    viddy
+    #viddy
     p7zip
     ripgrep # needed for telescope.nvim
     ranger
     dua
     difftastic
+    powertop
+    eza
 
     # Backup tool
     restic
     syncthing
     gparted
-    localsend
 
     # Shell and prompt
     fish
     starship
     powerline
     fzf
+    zoxide
 
     # Terminal app
-    #kitty
+    kitty
     pixcat
-    alacritty
+    #alacritty
     tmux
 
     # WebBrowser
@@ -72,36 +76,45 @@
 
     # KDE plasma
     #latte-dock
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.ark
-    libsForQt5.kcalc
+    #libsForQt5.qtstyleplugin-kvantum
+    #libsForQt5.ark
+    #libsForQt5.kcalc
     #libsForQt5.filelight
-    libsForQt5.qt5.qttools
-    libsForQt5.akonadi
+    #libsForQt5.qt5.qttools
+    #libsForQt5.akonadi
     #libsForQt5.okular
-    libsForQt5.gwenview
-    libsForQt5.karchive
+    #libsForQt5.gwenview
+    #libsForQt5.karchive
     #libsForQt5.krunner
     #libsForQt5.kcolorpicker
-    libsForQt5.kcolorchooser
+    #libsForQt5.kcolorchooser
     #libsForQt5.kwallet
     #libsForQt5.kwallet-pam
     #libsForQt5.dolphin
     libsForQt5.breeze-qt5
-    libsForQt5.qtstyleplugins
+    #libsForQt5.qtstyleplugins
     #libsForQt5.bismuth
     #libsForQt5.kalendar
 
+    # Gnome
+    #resources
+    newsflash
+    #turtle
+    #tangram
+    metadata-cleaner
+    curtail
+    #komikku
+
     # Productivity
-    #unstable.ferdium
-    #notion-app-enhanced
-    #unstable.appflowy
     obsidian
-    unstable.openboard
-    zotero
+    #unstable.openboard
+    #zotero
     unstable.typst
+    unstable.typstyle
+    texliveFull
     pdfpc
-    unstable.polylux2pdfpc
+    #unstable.polylux2pdfpc
+    hieroglyphic
 
     # Chat
     element-desktop
@@ -114,34 +127,38 @@
     # Security
     keepassxc
     pynitrokey
-    nitrokey-app2
-    wireshark
-    arp-scan
+    #nitrokey-app2 # Installed via flatpak
     openssl
-    nmap
+    #nmap
     age
     gnupg
-    #pinentry-curses
-    #pinentry
+
+    # Networking
+    arp-scan
+    rustscan
+    #netsleuth
+    wireshark
 
     # Editor
-    neovim
-    vscodium
+    unstable.neovim
+    #unstable.zed-editor
     fd
     tree-sitter
 
     # Programming stuff
     git
+    lazygit
     delta
-    go
     nodejs_20
-    luajitPackages.luarocks
+    lua51Packages.lua
+    lua51Packages.luarocks
+    lua51Packages.jsregexp
     gcc
     cmake
-    docker
-    podman
-    dbeaver-bin
+    lldb # debuger
+    #dbeaver-bin
     #gopls # lsp
+    clang-tools # lsp (cpp / c ?)
     biome #lsp + other things
     vscode-langservers-extracted # lsp (html, css, json, eslint)
     emmet-ls # lsp
@@ -150,39 +167,49 @@
     docker-ls # lsp
     yaml-language-server # lsp
     taplo # lsp
-    typst-lsp # lsp
+    #typst-lsp # lsp
     unstable.tinymist # lsp
+    nodePackages.vscode-json-languageserver # json
+    #nodePackages.pyright # lsp python
+    unstable.ruff # formatter python
+    python3Packages.python-lsp-server # lsp python
+    python3Packages.python-lsp-ruff # lsp python
+    python3Packages.pylsp-rope # lsp python
+    python3Packages.pylsp-mypy # lsp python
     #tailwindcss-language-server # lsp
     #nodePackages.svelte-language-server # lsp
     #nodePackages.typescript-language-server # lsp
 
-    # Server
-    rpi-imager
-
     # Gaming
     prismlauncher
-    corectrl
-    lutris
+    unstable.lutris
+    protonup-qt
     wineWowPackages.waylandFull
-    #wineWowPackages.staging
-    amdvlk
-    minetest
-    mindustry
     gnome.zenity
     xterm
     xdelta
+    #corectrl
+    #minetest
+    mindustry
+    moonlight-qt
+    ryujinx
+    #airshipper # Not working ?!
+    #wesnoth
 
     # Multimedia
     vlc
     obs-studio
-    libsForQt5.kdenlive
+    #libsForQt5.kdenlive
     gimp
+    upscayl
     inkscape
     gnome.adwaita-icon-theme # fix the missing icons in inkscape
     krita
     freetube
-    mpv
-    deluge-gtk
+    #mpv
+    #deluge-gtk
+    fragments
+    gnome-podcasts
     unstable.calibre
 
     # Virtualisation
@@ -191,52 +218,58 @@
     virtiofsd
 
     # System
-    piper
+    #piper
     hardinfo
     lm_sensors
     btrfs-progs
     btrfs-heatmap
     ntfs3g
     fuse3
+    impression
 
     # Network
-    networkmanagerapplet
-    blueman
-    bluez
-    bluez-alsa
-    bluez-tools
+    #networkmanagerapplet
+    #blueman
+    #bluez
+    #bluez-alsa
+    #bluez-tools
 
     # NixOS tools
     alejandra
 
     # Office
-    libreoffice-fresh
+    #libreoffice-fresh
     unstable.pandoc
-    unstable.drawio
+    #unstable.drawio
     unstable.d2
-    #d2
-    flameshot
     anki-bin
-    nextcloud-client
-    homebank
-    xfce.thunar
-    unstable.hplipWithPlugin
-    #geogebra6
-    giac-with-xcas
-    #unstable.sage
-    zathura
+    #nextcloud-client
+    #unstable.hplipWithPlugin
+    #giac-with-xcas # Impossible to run on my laptop with display scaling
+    sageWithDoc
     unstable.rnote
-    taskwarrior3
-    timewarrior
+    unstable.taskwarrior3
+    taskwarrior-tui
+    planify
+    hledger
+    hledger-web
+    hledger-ui
+
+    # Fonts
+    #nerdfonts
+    font-awesome_6
 
     # 3D
     freecad
     blender-hip
 
     # Other
-    feh
-    pavucontrol
+    #feh
+    #pavucontrol
     xdg-utils
-    unstable.ollama
+    #unstable.ollama
+    unstable.alpaca
+    #unstable.nh
+    alsa-utils
   ];
 }
