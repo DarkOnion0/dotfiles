@@ -26,10 +26,7 @@ require('plugins/undotree')
 --require('plugins/rainbow_parentheses')
 require('plugins/context')
 --require('plugins/coc-current-word')
---require('plugins/onedark-nvim')
-require('plugins/catppuccin')
 require('plugins/treesitter')
---require('plugins/gruvbox')
 --require('plugins/hologram')
 require('plugins/telescope')
 require('plugins/neo-tree')
@@ -42,7 +39,11 @@ require('plugins/diagflow')
 --require('plugins/vim-grammarous')
 
 --
--- global settings that need to be loaded at the end
+-- global settings that need to be loaded at the end (mostly theme)
 --
 
+--require('plugins/onedark-nvim')
+require('plugins/catppuccin')
+--require('plugins.cyberdream-nvim')
+--require('plugins/gruvbox')
 require('theme')

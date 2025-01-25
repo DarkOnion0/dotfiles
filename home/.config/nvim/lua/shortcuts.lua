@@ -13,34 +13,18 @@ map("t", "<C-t>", "<cmd>Lspsaga term_toggle<CR>")
 
 map("n", "gn", ":bn<CR>")
 map("n", "gp", ":bp<CR>")
+map("n", "gN", ":tabnext<CR>")
+map("n", "gP", ":tabprevious<CR>")
 
 map("n", "gl", "$")
 map("v", "gl", "$")
 map("n", "gh", "0")
 map("v", "gh", "0")
 
---vim.cmd([[
---    if has('nvim')
---        inoremap <silent><expr> <c-space> coc#refresh()
---    else
---        inoremap <silent><expr> <c-@> coc#refresh()
---    endif
---]])
---map("n", "<C-d>", ":call Show_documentation()<CR>")
---map("n", "<C-f>", ":CocCommand explorer<CR>")
---map("n", "gd", ":call CocActionAsync('jumpDefinition')<cr>")
---map("n", "gy", ":call CocActionAsync('jumpTypeDefinition')<cr>")
---map("n", "gi", ":call CocActionAsync('jumpImplementation')<cr>")
---map("n", "gr", ":call CocActionAsync('jumpReferences')<cr>")
---map("n", "gf", "<Plug>(coc-dialog-menu)")
---map("n", "<C-x>", ":CocList diagnostics<CR>")
---vim.cmd([[
---    inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
---]])
-
 map("n", "<F2>", ":UndotreeToggle<CR>")
 
 map("n", "<space>f", ":Telescope find_files<CR>")
+map("n", "<space>F", ":Telescope live_grep<CR>")
 map("n", "<space>b", ":Telescope buffers<CR>")
 
 map("i", "<Tab>", "<C-t>")
@@ -50,7 +34,7 @@ map("n", "<C-f>", ":NeoTreeFocusToggle<CR>")
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>q", ":Telescope diagnostics")
+vim.keymap.set("n", "<space>q", ":Telescope diagnostics<CR>")
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -93,7 +77,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
         -- vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
         -- vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<space>F", function()
+        vim.keymap.set("n", "<space>j", function()
             vim.lsp.buf.format({ async = true })
         end, opts)
     end,

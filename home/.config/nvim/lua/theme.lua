@@ -11,7 +11,7 @@
 --vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
 --vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
 
-vim.cmd.colorscheme("catppuccin")
+--vim.cmd.colorscheme("cyberdream")
 
 local timer = vim.loop.new_timer()
 vim.g.auto_switch = true
@@ -33,7 +33,7 @@ timer:start(
 		local hour = tonumber(os.date("%H"))
 		local bg = "dark"
 
-		if hour >= 7 and hour < 18 then
+		if hour >= 7 and hour < 17 then
 			bg = "light"
 		end
 

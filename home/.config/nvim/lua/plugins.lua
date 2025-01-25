@@ -27,7 +27,7 @@ return require("lazy").setup({
         "neovim/nvim-lspconfig",
         "nvimdev/lspsaga.nvim", --> lsp sugar
         "onsails/lspkind-nvim", --> vscode-like pictograms for neovim lsp completion items
-        'dgagn/diagflow.nvim', --> display lsp message in the top right corner
+        'dgagn/diagflow.nvim',  --> display lsp message in the top right corner
 
         -- dap
         "mfussenegger/nvim-dap",
@@ -36,7 +36,7 @@ return require("lazy").setup({
         "jose-elias-alvarez/null-ls.nvim",
 
         -- completion
-        "L3MON4D3/LuaSnip",   --> snippets in completion
+        "L3MON4D3/LuaSnip",         --> snippets in completion
         "saadparwaiz1/cmp_luasnip", --> integration with the completion engine
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
@@ -56,7 +56,7 @@ return require("lazy").setup({
         },
 
         -- other
-        { "j-hui/fidget.nvim", event="VeryLazy", opts = {} },
+        { "j-hui/fidget.nvim", event = "VeryLazy", opts = {} },
         "folke/neodev.nvim",
         "nvim-lua/plenary.nvim",
     },
@@ -68,7 +68,7 @@ return require("lazy").setup({
         {
             "folke/noice.nvim",
             -- event = "VeryLazy",
-            lazy = false,    -- make sure we load this during startup
+            lazy = false,   -- make sure we load this during startup
             priority = 999, -- make sure to load this before all the other start plugins (except the theme)
             config = function()
                 require("noice").setup({
@@ -82,11 +82,11 @@ return require("lazy").setup({
                     },
                     -- you can enable a preset for easier configuration
                     presets = {
-                        bottom_search = false, -- use a classic bottom cmdline for search
-                        command_palette = true, -- position the cmdline and popupmenu together
+                        bottom_search = false,        -- use a classic bottom cmdline for search
+                        command_palette = true,       -- position the cmdline and popupmenu together
                         long_message_to_split = true, -- long messages will be sent to a split
-                        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                        lsp_doc_border = true, -- add a border to hover docs and signature help
+                        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+                        lsp_doc_border = true,        -- add a border to hover docs and signature help
                     },
                 })
             end,
@@ -107,8 +107,8 @@ return require("lazy").setup({
         "utilyre/sentiment.nvim",
         event = "VeryLazy",
         init = function()
-          -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-          vim.g.loaded_matchparen = 1
+            -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+            vim.g.loaded_matchparen = 1
         end,
     },
     {
@@ -118,9 +118,9 @@ return require("lazy").setup({
         end,
     },
 
-    {"BurntSushi/ripgrep", lazy=true},
-    {"sharkdp/fd", lazy=true},
-    {"nvim-telescope/telescope-github.nvim", lazy=true},
+    { "BurntSushi/ripgrep",                   lazy = true },
+    { "sharkdp/fd",                           lazy = true },
+    { "nvim-telescope/telescope-github.nvim", lazy = true },
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
@@ -142,7 +142,12 @@ return require("lazy").setup({
 
     {
         "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
+        build = ":TSUpdate",
+
+        dependencies = {
+            -- NOTE: additional parser
+            { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+        },
     },
     --{
     --	"nvim-treesitter/nvim-treesitter-context",
@@ -151,16 +156,14 @@ return require("lazy").setup({
     --	},
     --})
 
-    { "editorconfig/editorconfig-vim" },
-
     -- editor
     { "mhinz/vim-startify" },
 
     "wakatime/vim-wakatime",
 
-    { "mbbill/undotree", cmd="UndotreeToggle" },
+    { "mbbill/undotree",   cmd = "UndotreeToggle" },
 
-    --use { 'junegunn/rainbow_parentheses.vim' }
+    -- { 'junegunn/rainbow_parentheses.vim' , lazy = true,}
 
     {
         "karb94/neoscroll.nvim",
@@ -169,13 +172,13 @@ return require("lazy").setup({
         end
     },
 
-    { "gbprod/yanky.nvim", lazy=true, },
+    { "gbprod/yanky.nvim",       lazy = true, },
 
     --use "rhysd/vim-grammarous"
 
     {
         "nvim-neo-tree/neo-tree.nvim",
-        cmd="NeoTreeFocusToggle",
+        cmd = "NeoTreeFocusToggle",
         branch = "v2.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -196,7 +199,7 @@ return require("lazy").setup({
     -- })
 
     {
-        "folke/zen-mode.nvim", cmd="ZenMode",
+        "folke/zen-mode.nvim", cmd = "ZenMode",
     },
 
     -- status bar
@@ -213,13 +216,80 @@ return require("lazy").setup({
         lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
     },
+    {
+        "scottmckendry/cyberdream.nvim",
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+    },
 
     -- log
     { "MTDL9/vim-log-highlighting", ft = "log" },
 
     -- d2
-    { "terrastruct/d2-vim", ft = "d2" },
+    { "terrastruct/d2-vim",         ft = "d2" },
 
     -- rust
-    { "simrat39/rust-tools.nvim", ft="rust" },
+    { "simrat39/rust-tools.nvim",   ft = "rust" },
+
+    -- obsidian
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*", -- recommended, use latest release instead of latest commit
+        lazy = true,
+        -- ft = "markdown",
+        -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+        event = {
+            -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+            -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+            -- refer to `:h file-pattern` for more examples
+            "BufReadPre /home/dark/Notes/Personal/*.md",
+            "BufNewFile /home/dark/Notes/Personal/*.md",
+        },
+        dependencies = {
+            -- Required.
+            "nvim-lua/plenary.nvim",
+
+            -- see below for full list of optional dependencies 👇
+        },
+        opts = {
+            workspaces = {
+                {
+                    name = "personal",
+                    path = "~/Notes/Personal",
+                },
+                -- {
+                --     name = "work",
+                --     path = "~/vaults/work",
+                -- },
+            },
+
+            -- see below for full list of options 👇
+        },
+    },
+
+    -- lean
+    {
+        'Julian/lean.nvim',
+        event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'nvim-lua/plenary.nvim',
+
+            -- optional dependencies:
+
+            -- 'andymass/vim-matchup',          -- for enhanced % motion behavior
+            -- 'andrewradev/switch.vim',        -- for switch support
+            -- 'tomtom/tcomment_vim',           -- for commenting
+            'nvim-telescope/telescope.nvim', -- for 2 Lean-specific pickers
+
+            -- a completion engine
+            --    hrsh7th/nvim-cmp or Saghen/blink.cmp are popular choices
+        },
+
+        ---@type lean.Config
+        opts = { -- see below for full configuration options
+            mappings = true,
+        }
+    }
 })
