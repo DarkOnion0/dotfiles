@@ -1,3 +1,6 @@
+# Nix
+.direnv/
+
 # Editors
 .idea/
 .vscode/
