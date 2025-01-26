@@ -3,50 +3,80 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
-    #nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Flake related stuff
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
-
-  outputs = {
+  outputs = inputs @ {
     self,
     flake-utils,
     nixpkgs,
     nixos-hardware,
+    flake-parts,
+    treefmt-nix,
+    deploy-rs,
     ...
-  }@inputs:
-  let
-    inherit (flake-utils.lib) eachDefaultSystem;
-    inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; }) recursiveMergeAttrs;
-    inherit (import ./lib/flake.nix inputs) mkNixOSConfig;
-  in
-  (recursiveMergeAttrs [
-      # NixOS configs
-      (mkNixOSConfig { 
-        hostname = "onion";
-        extraModules = [
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
-        ];
-      })
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        ./nixos
+      ];
 
-      # shell.nix
-      (eachDefaultSystem (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              rnix-lsp
-              alejandra
-            ];
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        lib,
+        ...
+      }: {
+        devShells.default = pkgs.mkShell {
+          nativeBuildInputs = with pkgs; [
+            # Deployment
+            deploy-rs.outputs.packages.${system}.deploy-rs
+
+            # Nix
+            alejandra
+            nil
+            statix
+          ];
+        };
+
+        treefmt.config = {
+          projectRootFile = "flake.nix";
+          programs = {
+            prettier = {
+              enable = true;
+              settings.editorconfig = true;
+            };
+            alejandra.enable = true;
           };
-        }))
-    ]); # END recursiveMergeAttrs
+        };
+
+        checks = {
+          statix = pkgs.stdenv.mkDerivation {
+            name = "statix";
+            src = ./.;
+            doCheck = true;
+            nativeBuildInputs = with pkgs; [statix];
+            checkPhase = ''
+              statix check .
+            '';
+          };
+        };
+      };
+
+      flake.checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    };
 }
