@@ -11,10 +11,10 @@
         hostName = "fm16";
       }
 
-      {
-        user = "dark";
-        hostName = "onion";
-      }
+      #{
+      #  user = "dark";
+      #  hostName = "onion";
+      #}
     ];
   in {
     nixosConfigurations = builtins.listToAttrs (
@@ -30,14 +30,14 @@
               inherit system;
 
               modules = [
-                (import ./hosts/${hostName}.nix {inherit inputs hostName;})
+                (import ./hosts/${hostName} {inherit inputs hostName;})
                 (import ./modules/user.nix {inherit user;})
 
                 ./modules/uefi.nix
                 ./modules/network.nix
 
                 ./modules/cups.nix
-    
+
                 ./modules/nk.nix
 
                 ./modules/i18n.nix

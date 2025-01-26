@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   # Enable the fingerprint sensor
   services.fprintd.enable = true;
 

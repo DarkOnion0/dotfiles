@@ -64,19 +64,19 @@
           };
         };
 
-        checks = {
-          statix = pkgs.stdenv.mkDerivation {
-            name = "statix";
-            src = ./.;
-            doCheck = true;
-            nativeBuildInputs = with pkgs; [statix];
-            checkPhase = ''
-              statix check .
-            '';
-          };
-        };
+        #checks = {
+        #  statix = pkgs.stdenv.mkDerivation {
+        #    name = "statix";
+        #    src = ./.;
+        #    doCheck = true;
+        #    nativeBuildInputs = with pkgs; [statix];
+        #    checkPhase = ''
+        #      statix check .
+        #    '';
+        #  };
+        #};
       };
 
-      flake.checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      #flake.checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

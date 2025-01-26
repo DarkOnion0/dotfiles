@@ -1,7 +1,6 @@
 {
   inputs,
   hostName,
-  user,
   ...
 }: {
   config,
@@ -11,9 +10,7 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.framework-16-inch-7040-amd
-
-    (import ./../../modules/user.nix {inherit user;})
+    inputs.nixos-hardware.nixosModules.framework-16-7040-amd
 
     ./../../modules/laptop.nix
     ./../../modules/sound.nix
@@ -27,6 +24,7 @@
     ./../../modules/container.nix
     ./../../modules/flatpak.nix
 
+    ./hardware-configuration.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
