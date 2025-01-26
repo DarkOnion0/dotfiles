@@ -20,6 +20,7 @@
     ./../../modules/xppen.nix
     ./../../modules/clamav.nix
     ./../../modules/gaming.nix
+    ./../../modules/tailscale.nix
 
     ./../../modules/container.nix
     ./../../modules/flatpak.nix
