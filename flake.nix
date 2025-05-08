@@ -6,6 +6,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Apps
+    pomodoroCounter.url = "github:DarkOnion0/PomodoroCounter/ci_speed";
+
     # Flake related stuff
     flake-parts.url = "github:hercules-ci/flake-parts";
 
@@ -19,10 +22,12 @@
     self,
     flake-utils,
     nixpkgs,
-    nixos-hardware,
+    nixpkgsUnstable,
+    pomodoroCounter,
     flake-parts,
     treefmt-nix,
     deploy-rs,
+    nixos-hardware,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {

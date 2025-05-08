@@ -19,6 +19,7 @@
   environment.systemPackages = with pkgs; [
     #gnomeExtensions.espresso # Broken
     #gnomeExtensions.desaturated-tray-icons # Broken
+    gnomeExtensions.hide-top-bar
     gnomeExtensions.appindicator
   ];
 }
