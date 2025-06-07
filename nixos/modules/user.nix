@@ -13,18 +13,12 @@
         if config.networking.networkmanager.enable
         then ["networkmanager"]
         else []
+      ) ++ (
+        if config.programs.virt-manager.enable
+        then ["libvirtd"]
+        else []
       );
     shell = pkgs.fish;
-    #packages = with pkgs; [
-    #  #  thunderbird
-    #  librewolf
-    #  brave
-
-    #  keepassxc
-    #
-    #  neovim
-    #  btop
-    #];
   };
   programs.fish.enable = true;
 }
