@@ -23,6 +23,7 @@
     ./../../modules/tailscale.nix
 
     ./../../modules/container.nix
+    ./../../modules/virt.nix
     ./../../modules/flatpak.nix
 
     ./hardware-configuration.nix
@@ -31,7 +32,7 @@
 
   networking = {inherit hostName;};
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     inputs.pomodoroCounter.packages."x86_64-linux".cli
   ];
 
