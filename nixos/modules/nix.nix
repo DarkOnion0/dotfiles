@@ -14,4 +14,6 @@
   environment.systemPackages = with pkgs; [
     vim
   ];
+
+  system.rebuild.enableNg = true;
 }
